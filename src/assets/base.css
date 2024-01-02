@@ -1,0 +1,169 @@
+:root {
+  --main-orang: #D87D4A;
+  --light-orange: #fbaf85;
+  --main-black: #101010;
+  --second-black: #191919;
+  --third-black: #0e0e0e;
+  --light-gray: #f1f1f1;
+  --ghost-white: #fafafa;
+}
+
+*,
+*::before,
+*::after,
+html,
+body {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Manrope', sans-serif;
+  font-size: 15px;
+  line-height: 25px;
+  font-weight: normal;
+}
+h1{
+  font-weight: bold;
+  font-size: 56px;
+  text-transform: uppercase;
+  line-height: 56px;
+  letter-spacing: 2px;
+}
+h2{
+  font-weight: bold;
+  font-size: 40px;
+  text-transform: uppercase;
+  line-height: 44px;
+  letter-spacing: 1.5px;
+}
+h3{
+  font-weight: bold;
+  font-size: 32px;
+  text-transform: uppercase;
+  line-height: 36px;
+  letter-spacing: 1.15px;
+}
+h4{
+  font-weight: bold;
+  font-size: 28px;
+  text-transform: uppercase;
+  line-height: 38px;
+  letter-spacing: 2px;
+}
+h5{
+  font-weight: bold;
+  font-size: 24px;
+  text-transform: uppercase;
+  line-height: 33px;
+  letter-spacing: 1.7px;
+}
+h6{
+  font-weight: bold;
+  font-size: 18px;
+  text-transform: uppercase;
+  line-height: 24px;
+  letter-spacing: 1.3px;
+}
+.overline{
+  color: var(--main-orang);
+  font-weight: normal;
+  font-size: 14px;
+  text-transform: uppercase;
+  line-height: 19px;
+  letter-spacing: 10px;
+}
+.subtitle{
+  color: var(--main-orang);
+  font-weight: bold;
+  font-size: 13px;
+  text-transform: uppercase;
+  line-height: 25px;
+  letter-spacing: 1px;
+}
+button a{
+  color: unset;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.btn1{
+  background-color: var(--main-orang);
+  color: white;
+  width: 160px;
+  height: 48px;
+  font-weight: bold;
+  font-size: 13px;
+  text-transform: uppercase;
+  border: none;
+}
+
+.btn1:hover{
+  background-color: var(--light-orange);
+}
+
+.btn2{
+  background-color: white;
+  width: 160px;
+  height: 48px;
+  color: black;
+  border: 1px solid black;
+  font-weight: bold;
+  font-size: 13px;
+}
+
+.btn2:hover{
+  background-color: var(--main-black);
+  color: white;
+}
+
+.btn3{
+  background-color: unset;
+  color: black;
+  border: none;
+  letter-spacing: 1px;
+}
+
+.btn3:hover{
+  color: var(--main-orang);
+}
+
+.btn3 .arrow{
+  color: var(--main-orang);
+}
+.btn4{
+  background-color: black;
+  width: 160px;
+  height: 48px;
+  color: white;
+  border: none;
+  font-weight: bold;
+  font-size: 13px;
+}
+.btn4:hover{
+  background-color: white;
+  color: black;
+
+}
+.wrapper{
+  width: 80%;
+  margin: 0 auto;
+  
+}
+
+.navs ul{
+  display: flex;
+  margin-left: -100px;
+}
+.navs ul li{
+  padding: 0 15px;
+  margin: 0 15px;
+  list-style: none;
+}
+.navs ul li:hover a{
+  color: var(--main-orang);
+}
+.navs ul li a{
+  color: white;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
