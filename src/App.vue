@@ -57,13 +57,14 @@ const getAllData = async () => {
 <template>
   
   <Header />
-
-  <RouterView 
-  :allData="allData"
-  :headphonesData="filteredData.headphonesData"
-  :earphonesData="filteredData.earphonesData"
-  :speakersData="filteredData.speakersData"/>
-
+    
+    <RouterView 
+    :allData="allData"
+    :headphonesData="filteredData.headphonesData"
+    :earphonesData="filteredData.earphonesData"
+    :speakersData="filteredData.speakersData"/>
+    
+    
   <Footer />
 
 </template>

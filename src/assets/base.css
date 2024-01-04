@@ -70,6 +70,7 @@ h6{
   text-transform: uppercase;
   line-height: 19px;
   letter-spacing: 10px;
+  margin-bottom: 20px;
 }
 .subtitle{
   color: var(--main-orang);
@@ -84,7 +85,9 @@ button a{
   text-decoration: none;
   text-transform: uppercase;
 }
-
+button:hover{
+  cursor: pointer;
+}
 .btn1{
   background-color: var(--main-orang);
   color: white;
@@ -166,4 +169,3 @@ button a{
   text-decoration: none;
   text-transform: uppercase;
 }
-

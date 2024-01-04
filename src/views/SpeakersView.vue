@@ -1,6 +1,7 @@
 <script setup>
 import CategoriesComp from '@/components/shared/CategoriesComp.vue'
 import BestGearComp from '@/components/Shared/BestGearComp.vue'
+import CategoryItems from '../components/Shared/CategoryItems.vue'
 
 import { onMounted,ref } from 'vue'
 
@@ -11,7 +12,7 @@ const props = defineProps({
 })
 
 onMounted(async() => {
-  console.log(props.speakersData);
+  // console.log(props.speakersData);
 })
 
 
@@ -19,16 +20,11 @@ onMounted(async() => {
 <template>
   <div class="speaker">
       
-    <div v-for="product in props.speakersData" :key="product">
+    <CategoryItems :categoryData="props.speakersData"/>
+          
+    <CategoriesComp />
 
-      <div>
-        <h1>{{ product.name }}</h1>
-      </div>
-    </div>
-            
-      <CategoriesComp />
-
-      <BestGearComp />
+    <BestGearComp />
 
 
   </div>

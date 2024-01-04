@@ -3,25 +3,30 @@
 <div class="categories-section">
       <div class="wrapper">
         <div class="category-boxes">
-          <div class="category-box">
-              <img src="@/assets/shared/desktop/image-category-thumbnail-headphones.png" alt="headphones category">
-              <h4 class="category-title">Headphones</h4>
-              <button class="btn3"><a href="#">Shop <span class="arrow">></span></a></button>
-          </div>
-          <div class="category-box">
-            
+
+          <router-link :to="{name: 'headphones'}">
+            <div class="category-box">
+                <img src="@/assets/shared/desktop/image-category-thumbnail-headphones.png" alt="headphones category">
+                <h4 class="category-title">Headphones</h4>
+                <button class="btn3">Shop <span class="arrow">></span></button>
+            </div>
+          </router-link>
+
+          <RouterLink :to="{name: 'speakers'}">
+            <div class="category-box">
               <img src="@/assets/shared/desktop/image-category-thumbnail-speakers.png" alt="speakers category">
-            
-            <h4 class="category-title">Speakers</h4>
-            <button class="btn3"><a href="#">Shop <span class="arrow">></span></a></button>
-          </div>
-          <div class="category-box">
-            
+              <h4 class="category-title">Speakers</h4>
+              <button class="btn3">Shop <span class="arrow">></span></button>
+            </div>
+          </RouterLink>
+
+          <RouterLink :to="{name: 'earphones'}">
+            <div class="category-box">
               <img src="@/assets/shared/desktop/image-category-thumbnail-earphones.png" alt="earphones category">
-            
-            <h4 class="category-title">Earphones</h4>
-            <button class="btn3"><a href="#">Shop <span class="arrow">></span></a></button>
-          </div>
+              <h4 class="category-title">Earphones</h4>
+              <button class="btn3">Shop <span class="arrow">></span></button>
+            </div>
+          </RouterLink>
         </div>
       </div>
     </div>
@@ -39,6 +44,10 @@
   align-items: center;
   height: 284px;
   position: relative;
+}
+.categories-section .category-boxes a{
+  text-decoration: unset;
+  color: unset;
 }
 .categories-section .category-boxes .category-box{
   width: 350px;
@@ -64,5 +73,8 @@
 .categories-section .category-boxes .category-box button .arrow{
   font-size: 16px;
   font-weight: bold;
+}
+.categories-section .category-boxes a:hover .category-box button {
+  color: var(--main-orang);
 }
 </style>

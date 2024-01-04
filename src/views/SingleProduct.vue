@@ -1,12 +1,230 @@
 <script setup>
+import CategoriesComp from '@/components/shared/CategoriesComp.vue'
+import BestGearComp from '@/components/Shared/BestGearComp.vue'
+import { onMounted,ref } from 'vue'
+
+const props = defineProps({
+  slug:{
+    type: String
+  },
+})
+
+const product = ref({})
+onMounted(async() => {
+  let currentProduct = JSON.parse(localStorage.getItem('products')).filter(item => item.slug == props.slug)
+  product.value = currentProduct[0]
+  console.log(product.value);
+})
 
 </script>
 
 <template>
+
+<div class="wrapper">
+  <a @click="$router.go(-1)">
+    <span class="backBtn">Go Back</span>
+  </a>
+
+  <div class="product" >
+
+    <div class="product-image">
+      <img :src="'/src/' + product.image?.desktop" alt="">
+    </div>
+
+    <div class="product-info">
+      <span class="new overline" v-if="product.new">New Product</span>
+      <h1>{{ product.name }}</h1>
+      <p class="desc">{{ product.description }}</p>
+
+      <h6 class="price">${{ product.price }}</h6>
+
+      <div class="btns">
+        <div class="qty-box">
+          <span class="minus">-</span>
+          <span class="value">1</span>
+          <span class="plus">+</span>
+        </div>
+        <button class="btn1"><a>Add To Cart</a></button>
+      </div>
+    </div>
+    
+  </div>
+
+  <div class="features">
+    <div class="features-box">
+      <h3>features</h3>
+      <p>{{ product.features }}</p>
+      
+      
+
+
+    </div>
+    <div class="in-the-box">
+      <h3>In the Box</h3>
+      <div class="box-items">
+        <div class="box-item" v-for="item in product.includes" :key="item">
+          <span class="item-count">{{ item.quantity }}x</span>
+          <span class="item-name">{{ item.item }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="gallery">
+    <div class="small">
+      <div class="first">
+        <img :src="'/src/' + product.gallery?.first.desktop" alt="">
+      </div>
+      <div class="second">
+        <img :src="'/src/' + product.gallery?.second.desktop" alt="">
+      </div>
+    </div>
+    <div class="big">
+      <div class="third">
+        <img :src="'/src/' + product.gallery?.third.desktop" alt="">
+      </div>
+    </div>
+  </div>
+
+  <div class="other-products">
+    <h3>You May also like</h3>
+    <div class="items">
+      <div class="item" v-for="item in product.others" :key="item">
+        <div class="item-image">
+          <img :src="'/src/' + item.image?.desktop" alt="">
+        </div>
+        <h5>{{ item.name }}</h5>
+        <button class="btn1" @click="$router.go()"><router-link :to="'/product/' + item.slug">See Product</router-link></button>
+      </div>
+    </div>
+  </div>
+
   
+</div>
+
+<CategoriesComp />
+
+<BestGearComp />
 </template>
 
-
 <style>
+span.backBtn{
+  display: block;
+  margin-top: 50px;
+}
+span.backBtn:hover{cursor: pointer;text-decoration: underline;}
 
+.product{
+  display: flex;
+  margin: 50px 0;
+}
+.product .product-image img{
+  background-size: cover;
+  width: 540px;
+  height: 560px;
+}
+.product .product-info{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  margin-left: 240px;
+}
+.product .product-info .desc{
+  margin: 30px  0;
+  width: 100%;
+}
+.product .product-info .price{margin-bottom: 30px;}
+.product .product-info .btns{display: flex;}
+.product .product-info .btns .qty-box{
+  width: 120px;
+  height: 48px;
+  margin-right: 20px;
+  background-color: var(--light-gray);
+  display: flex;
+}
+.product .product-info .btns .qty-box .minus,
+.product .product-info .btns .qty-box .value,
+.product .product-info .btns .qty-box .plus{
+  width: 40px;
+  height: 48px;
+  line-height: 48px;
+  text-align: center;
+}
+.product .product-info .btns .qty-box .minus:hover,
+.product .product-info .btns .qty-box .plus:hover{color: var(--main-orang);cursor: pointer;}
+
+/* ==================================================== */
+/* ==================== Features ====================== */
+/* ==================================================== */
+.features{
+  margin: 100px 0;
+  display: flex;
+  justify-content: space-between;
+}
+.features .features-box{width: 635px;}
+.features .in-the-box h3,
+.features .features-box h3{margin-bottom: 30px;}
+.features .features-box p{margin: 20px 0;}
+.features .in-the-box{
+  width: 350px;
+  display: flex;
+  flex-direction: column;
+}
+.features .in-the-box .box-items .box-item:not(:first-child){margin: 5px 0;}
+.features .in-the-box .box-items .box-item .item-count {color: var(--main-orang); margin-right: 20px; font-weight: bold;}
+/* ==================================================== */
+/* ==================== Gallery ====================== */
+/* ==================================================== */
+.gallery{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 100px;
+}
+.gallery .small{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.gallery .small .first,
+.gallery .small .second{
+  width: 445px;
+  height: 280px;
+}
+.gallery .small .first img,
+.gallery .small .second img{
+  background-size: cover;
+  border-radius: 10px;
+}
+.gallery .big .third{
+  width: 635px;
+  height: 592px;
+}
+.gallery .big .third img{background-size: cover;border-radius: 10px;}
+/* ==================================================== */
+/* ==================== other Products ====================== */
+/* ==================================================== */
+.other-products{
+  margin: 150px 0;
+}
+.other-products h3{text-transform: uppercase;margin: 50px 0; text-align: center;}
+.other-products .items{
+  display: flex;
+  justify-content: space-between;
+}
+.other-products .items .item{
+  width: 350px;
+  height: 470px;
+}
+.other-products .items .item h5{text-transform: uppercase;margin: 30px 0;text-align: center;}
+.other-products .items .item .item-image{
+  widows: 350px;
+  height: 318px;
+}
+.other-products .items .item .item-image img{
+  background-size: cover;
+  border-radius: 10px;
+  width: 100%;
+}
+.other-products .items .item button{display: block; margin: 0 auto;}
 </style>

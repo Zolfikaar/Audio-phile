@@ -1,6 +1,7 @@
 <script setup>
 import CategoriesComp from '@/components/shared/CategoriesComp.vue'
 import BestGearComp from '@/components/Shared/BestGearComp.vue'
+import CategoryItems from '../components/Shared/CategoryItems.vue'
 import { onMounted,ref } from 'vue'
 
 const props = defineProps({
@@ -10,20 +11,14 @@ const props = defineProps({
 })
 
 onMounted(async() => {
-  console.log(props.headphonesData);
+  // console.log(props.headphonesData);
 })
 
 </script>
 <template>
   <div class="headphones">
 
-    <div v-for="product in props.headphonesData" :key="product">
-
-      <div>
-        <h1>{{ product.name }}</h1>
-      </div>
-    </div>
-    
+    <CategoryItems class="category" :categoryData="props.headphonesData"/>
            
     <CategoriesComp />
 
@@ -34,5 +29,11 @@ onMounted(async() => {
 </template>
 
 <style>
-
+.category .category-content .products .product{
+  display: flex;
+  margin-top: 100px;
+}
+.category .category-content .products .product:nth-child(even){
+  flex-direction: row-reverse;
+}
 </style>

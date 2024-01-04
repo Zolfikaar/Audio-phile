@@ -35,7 +35,12 @@
   line-height: 25px;
   opacity: .5;
 }
-.best-gear-section .left-box h1 .base-color{color: var(--main-orang);}
+.best-gear-section .left-box h1 .base-color{
+  color: var(--main-orang);
+  font-size: 40px;
+  font-weight: bold;
+  letter-spacing: 1.43px;
+  line-height: 40px;}
 .best-gear-section img{
   border-radius: 8px;
   width: 40%;
