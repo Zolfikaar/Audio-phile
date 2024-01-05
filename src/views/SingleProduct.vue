@@ -108,12 +108,6 @@ onMounted(async() => {
 </template>
 
 <style>
-span.backBtn{
-  display: block;
-  margin-top: 50px;
-}
-span.backBtn:hover{cursor: pointer;text-decoration: underline;}
-
 .product{
   display: flex;
   margin: 50px 0;
@@ -204,9 +198,7 @@ span.backBtn:hover{cursor: pointer;text-decoration: underline;}
 /* ==================================================== */
 /* ==================== other Products ====================== */
 /* ==================================================== */
-.other-products{
-  margin: 150px 0;
-}
+.other-products{margin: 150px 0;}
 .other-products h3{text-transform: uppercase;margin: 50px 0; text-align: center;}
 .other-products .items{
   display: flex;

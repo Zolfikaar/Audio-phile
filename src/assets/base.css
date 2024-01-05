@@ -151,7 +151,6 @@ button:hover{
   margin: 0 auto;
   
 }
-
 .navs ul{
   display: flex;
   margin-left: -100px;
@@ -169,3 +168,9 @@ button:hover{
   text-decoration: none;
   text-transform: uppercase;
 }
+span.backBtn{
+  display: block;
+  margin-top: 50px;
+}
+span.backBtn:hover{cursor: pointer;color: var(--main-orang);}
+#app{position: relative;}

@@ -1,11 +1,14 @@
 <script setup>
-import { RouterView } from 'vue-router'
-
+import axios from 'axios'
+import Cart from './components/Cart.vue'
 import Header from './components/Header.vue'
 import Footer from './components/Footer.vue'
 
-import { onMounted,ref } from 'vue'
-import axios from 'axios'
+import { onMounted,ref, getCurrentInstance } from 'vue';
+import { useRoute } from 'vue-router';
+
+import { useCartStore } from '@/stores/cartStore'
+const cart = useCartStore()
 
 const props = defineProps({
   filteredData: {
@@ -20,7 +23,7 @@ const props = defineProps({
 
 
 let allData = ref({})
-let theDataExist = false
+let showCart = false
 
 
 onMounted( async () => {
@@ -58,11 +61,14 @@ const getAllData = async () => {
   
   <Header />
     
-    <RouterView 
-    :allData="allData"
-    :headphonesData="filteredData.headphonesData"
-    :earphonesData="filteredData.earphonesData"
-    :speakersData="filteredData.speakersData"/>
+  <Cart v-if="cart.isOpen" />
+  <!-- <Cart v-if="showCart" /> -->
+
+  <RouterView 
+  :allData="allData"
+  :headphonesData="filteredData.headphonesData"
+  :earphonesData="filteredData.earphonesData"
+  :speakersData="filteredData.speakersData"/>
     
     
   <Footer />

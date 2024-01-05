@@ -1,10 +1,15 @@
-<script>
+<script setup>
 import Navbar from '@/components/Navbar.vue'
-export default {
-  components: {
-    Navbar
-  }
-}
+
+
+import { useCartStore } from '@/stores/cartStore'
+const cart = useCartStore()
+
+const toggleCart = () => {
+  cart.isOpen = !cart.isOpen;
+  console.log('working from header');
+};
+
 </script>
 <template>
   <div class="topbar">
@@ -14,13 +19,13 @@ export default {
       <nav>
 
         <div class="nav-item logo">
-          <a href="#"><img src="@/assets/shared/desktop/logo.svg" alt=""></a>
+          <RouterLink :to="{name: 'home'}"><img src="@/assets/shared/desktop/logo.svg" alt=""></RouterLink>
         </div>
 
         <Navbar />
         
-        <div class="nav-item cart">
-          <a href="#"><img src="@/assets/shared/desktop/icon-cart.svg" alt=""></a>
+        <div class="nav-item cart-icon" @click="cart.toggleCart">
+          <img src="@/assets/shared/desktop/icon-cart.svg" alt="Shopping Cart">
         </div>
 
       </nav>
@@ -45,6 +50,8 @@ export default {
   align-items: center;
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
-
+.cart-icon:hover{
+  cursor: pointer;
+}
 
 </style>
