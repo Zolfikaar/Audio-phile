@@ -1,14 +1,9 @@
 <script setup>
 import Navbar from '@/components/Navbar.vue'
-
-
 import { useCartStore } from '@/stores/cartStore'
-const cart = useCartStore()
 
-const toggleCart = () => {
-  cart.isOpen = !cart.isOpen;
-  console.log('working from header');
-};
+const cart = useCartStore()
+const toggleCart = cart.toggleCart
 
 </script>
 <template>
@@ -24,7 +19,7 @@ const toggleCart = () => {
 
         <Navbar />
         
-        <div class="nav-item cart-icon" @click="cart.toggleCart">
+        <div class="nav-item cart-icon" @click="toggleCart">
           <img src="@/assets/shared/desktop/icon-cart.svg" alt="Shopping Cart">
         </div>
 

@@ -3,6 +3,10 @@ import CategoriesComp from '@/components/shared/CategoriesComp.vue'
 import BestGearComp from '@/components/Shared/BestGearComp.vue'
 import { onMounted,ref } from 'vue'
 
+import { useCartStore } from '@/stores/cartStore'
+
+const cartStore = useCartStore()
+let cart = cartStore.cart
 const props = defineProps({
   slug:{
     type: String
@@ -13,15 +17,58 @@ const product = ref({})
 onMounted(async() => {
   let currentProduct = JSON.parse(localStorage.getItem('products')).filter(item => item.slug == props.slug)
   product.value = currentProduct[0]
-  console.log(product.value);
 })
+
+const addToCart = (item, itemQty) => {
+  // trim product name from unnessery words for proper cart design 
+  let wordsToRemove = ['Headphones','Speaker','Wireless' ,'Earphones']
+  let trimedName = item.name
+
+  wordsToRemove.forEach((word) => {
+    trimedName.includes(word)
+    trimedName = trimedName.replace(word, '')
+  })
+
+  let itemData = {
+    id: item.id,
+    name: trimedName, 
+    price: item.price,
+    image: item.image.mobile,
+    quantity: itemQty
+  }
+
+  let currentItemIndex = cart.findIndex((ele) => ele.id === itemData.id);
+
+  if (currentItemIndex === -1) {
+    // Item not found in the cart, so add it
+    cart.push(itemData);
+  } else {
+    // Item found in the cart, update its quantity
+    cart[currentItemIndex].quantity += itemQty;
+  }
+
+}
+
+// these two + [min value if wanted] should be in the store for more robust build
+const productQuantity = ref(1); // Replace with actual product quantity
+const maxProductQuantity = ref(10) // 10 for example
+const decrementProductQuantity = () => {
+  if (productQuantity.value > 1) {
+    productQuantity.value--;
+  }
+}
+const incrementProductQuantity = () => {
+  if (productQuantity.value < maxProductQuantity.value) {
+    productQuantity.value++;
+  }
+}
 
 </script>
 
 <template>
 
 <div class="wrapper">
-  <a @click="$router.go(-1)">
+  <a class="backBtn-anchor" @click="$router.go(-1)">
     <span class="backBtn">Go Back</span>
   </a>
 
@@ -40,11 +87,11 @@ onMounted(async() => {
 
       <div class="btns">
         <div class="qty-box">
-          <span class="minus">-</span>
-          <span class="value">1</span>
-          <span class="plus">+</span>
+          <span class="minus" @click="decrementProductQuantity">-</span>
+          <span class="value">{{ productQuantity }}</span>
+          <span class="plus" @click="incrementProductQuantity">+</span>
         </div>
-        <button class="btn1"><a>Add To Cart</a></button>
+        <button class="btn1" @click="addToCart(product, productQuantity)"><a>Add To Cart</a></button>
       </div>
     </div>
     
@@ -108,6 +155,9 @@ onMounted(async() => {
 </template>
 
 <style>
+.backBtn-anchor{display: block; padding-top: 50px;}
+span.backBtn:hover{cursor: pointer;color: var(--main-orang);}
+
 .product{
   display: flex;
   margin: 50px 0;

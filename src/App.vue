@@ -4,8 +4,7 @@ import Cart from './components/Cart.vue'
 import Header from './components/Header.vue'
 import Footer from './components/Footer.vue'
 
-import { onMounted,ref, getCurrentInstance } from 'vue';
-import { useRoute } from 'vue-router';
+import { onMounted,ref } from 'vue';
 
 import { useCartStore } from '@/stores/cartStore'
 const cart = useCartStore()
@@ -23,8 +22,6 @@ const props = defineProps({
 
 
 let allData = ref({})
-let showCart = false
-
 
 onMounted( async () => {
   getAllData()
@@ -60,9 +57,10 @@ const getAllData = async () => {
 <template>
   
   <Header />
-    
+  
   <Cart v-if="cart.isOpen" />
-  <!-- <Cart v-if="showCart" /> -->
+  
+  <div id="app-overlay" v-if="cart.isOpen"></div>
 
   <RouterView 
   :allData="allData"
@@ -70,7 +68,16 @@ const getAllData = async () => {
   :earphonesData="filteredData.earphonesData"
   :speakersData="filteredData.speakersData"/>
     
-    
   <Footer />
 
 </template>
+
+<style>
+#app-overlay{
+  background-color: rgba(0, 0, 0, .3);
+  z-index: 5;
+  position: absolute;
+  width: 100%;
+  height: 98%;
+}
+</style>
