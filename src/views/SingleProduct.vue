@@ -6,68 +6,104 @@ import { onMounted,ref } from 'vue'
 import { useCartStore } from '@/stores/cartStore'
 
 const cartStore = useCartStore()
-let cart = cartStore.cart
-const props = defineProps({
-  slug:{
-    type: String
-  },
-})
+// let cart = JSON.parse(localStorage.getItem('products'))
 
-const product = ref({})
-onMounted(async() => {
-  let currentProduct = JSON.parse(localStorage.getItem('products')).filter(item => item.slug == props.slug)
-  product.value = currentProduct[0]
-})
+// const props = defineProps({
+//   slug:{
+//     type: String
+//   },
+// })
 
-const addToCart = (item, itemQty) => {
-  // trim product name from unnessery words for proper cart design 
-  let wordsToRemove = ['Headphones','Speaker','Wireless' ,'Earphones']
-  let trimedName = item.name
+// const product = ref({})
+// onMounted(async() => {
+//   let currentProduct = JSON.parse(localStorage.getItem('products')).filter(item => item.slug == props.slug)
+//   product.value = currentProduct[0]
 
-  wordsToRemove.forEach((word) => {
-    trimedName.includes(word)
-    trimedName = trimedName.replace(word, '')
-  })
+//   // console.log(cart);
+// })
 
-  let itemData = {
-    id: item.id,
-    name: trimedName, 
-    price: item.price,
-    image: item.image.mobile,
-    quantity: itemQty
-  }
+// const addToCart = (item, itemQty) => {
+//   // trim product name from unnessery words for proper cart design 
+//   let wordsToRemove = ['Headphones','Speaker','Wireless' ,'Earphones']
+//   let trimedName = item.name
 
-  let currentItemIndex = cart.findIndex((ele) => ele.id === itemData.id);
+//   wordsToRemove.forEach((word) => {
+//     trimedName.includes(word)
+//     trimedName = trimedName.replace(word, '')
+//   })
 
-  if (currentItemIndex === -1) {
-    // Item not found in the cart, so add it
-    cart.push(itemData);
-  } else {
-    // Item found in the cart, update its quantity
-    cart[currentItemIndex].quantity += itemQty;
-  }
+//   let itemData = {
+//     id: item.id,
+//     name: trimedName, 
+//     price: item.price,
+//     image: item.image.mobile,
+//     quantity: itemQty
+//   }
 
-}
+//   let currentItemIndex = cart.findIndex((ele) => ele.id === itemData.id);
+
+//   if (currentItemIndex === -1) {
+//     // Item not found in the cart, so add it
+//     cart.push(itemData);
+//   } else {
+//     // Item found in the cart, update its quantity
+//     cart[currentItemIndex].quantity += itemQty;
+//   }
+
+// }
+
+// const addToCart = (item, itemQty) => {
+//   // trim product name from unnessery words for proper cart design 
+//   let wordsToRemove = ['Headphones', 'Speaker', 'Wireless', 'Earphones'];
+//   let trimedName = item.name.replaceAll(wordsToRemove.join('|'), '');
+
+//   // Ensure cart is initialized as an array
+//   let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+// // console.log(cart);
+//   let existingProduct = cart.filter((product) => product.id === item.id);
+
+//   if (existingProduct) {
+//     existingProduct.quantity = itemQty;
+//   } else {
+//     let itemData = {
+//       id: item.id,
+//       name: trimedName,
+//       price: item.price,
+//       image: item.image.mobile,
+//       quantity: itemQty,
+//     };
+
+//     cart.push(itemData);
+//   }
+
+//   // Update localStorage
+//   localStorage.setItem('cart', JSON.stringify(cart));
+
+// }
 
 // these two + [min value if wanted] should be in the store for more robust build
-const productQuantity = ref(1); // Replace with actual product quantity
-const maxProductQuantity = ref(10) // 10 for example
-const decrementProductQuantity = () => {
-  if (productQuantity.value > 1) {
-    productQuantity.value--;
-  }
-}
-const incrementProductQuantity = () => {
-  if (productQuantity.value < maxProductQuantity.value) {
-    productQuantity.value++;
-  }
-}
+// const productQuantity = ref(1); // Replace with actual product quantity
+// const maxProductQuantity = ref(10) // 10 for example
+// const decrementProductQuantity = () => {
+//   if (productQuantity.value > 1) {
+//     productQuantity.value--;
+//   }
+// }
+// const incrementProductQuantity = () => {
+//   if (productQuantity.value < maxProductQuantity.value) {
+//     productQuantity.value++;
+//   }
+// }
 
+const addToCart = cartStore.addToCart
+// const cartCount = ref()
+// cartCount.value = cartStore.cartCount
 </script>
 
 <template>
 
-<div class="wrapper">
+<!-- <div class="wrapper">
   <a class="backBtn-anchor" @click="$router.go(-1)">
     <span class="backBtn">Go Back</span>
   </a>
@@ -91,6 +127,7 @@ const incrementProductQuantity = () => {
           <span class="value">{{ productQuantity }}</span>
           <span class="plus" @click="incrementProductQuantity">+</span>
         </div>
+        
         <button class="btn1" @click="addToCart(product, productQuantity)"><a>Add To Cart</a></button>
       </div>
     </div>
@@ -147,7 +184,10 @@ const incrementProductQuantity = () => {
   </div>
 
   
-</div>
+</div> -->
+
+<div>{{ cartStore.cartCount }}</div>
+<button @click="addToCart">Add to cart</button>
 
 <CategoriesComp />
 
@@ -260,7 +300,7 @@ span.backBtn:hover{cursor: pointer;color: var(--main-orang);}
 }
 .other-products .items .item h5{text-transform: uppercase;margin: 30px 0;text-align: center;}
 .other-products .items .item .item-image{
-  widows: 350px;
+  width: 350px;
   height: 318px;
 }
 .other-products .items .item .item-image img{

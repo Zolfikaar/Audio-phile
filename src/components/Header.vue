@@ -2,8 +2,7 @@
 import Navbar from '@/components/Navbar.vue'
 import { useCartStore } from '@/stores/cartStore'
 
-const cart = useCartStore()
-const toggleCart = cart.toggleCart
+const toggleCart = useCartStore().toggleCart
 
 </script>
 <template>

@@ -5,11 +5,11 @@ import CategoryItems from '../components/Shared/CategoryItems.vue'
 
 import { onMounted,ref } from 'vue'
 
-const props = defineProps({
-  earphonesData: {
-    type: Object
-  }
-})
+// const props = defineProps({
+//   earphonesData: {
+//     type: Object
+//   }
+// })
 
 onMounted(async() => {
   // console.log(props.earphonesData);
@@ -19,7 +19,8 @@ onMounted(async() => {
 <template>
   <div class="earphones">    
       
-      <CategoryItems :categoryData="props.earphonesData"/>
+      <!-- <CategoryItems :categoryData="props.earphonesData"/> -->
+      <CategoryItems />
       
       <CategoriesComp />
       

@@ -4,39 +4,57 @@ import { storeToRefs } from 'pinia';
 import { useCartStore } from '@/stores/cartStore'
 
 const cartStore = useCartStore()
-const cartLength = cartStore.cart.length
-const cart = cartStore.cart
+// const cart = JSON.parse(localStorage.getItem('cart')) // cartStore.cart
+// const cartLength = cart.length // cartStore.cart.length
 
-// onMounted(() => {
-  //   console.log(cart);
-  // })
+// let cartLS = JSON.parse(localStorage.getItem('cart'))
+
+onMounted(() => {
+  // console.log();
+  // console.log(cart);
+})
   
-const cartTotal = cart.reduce((total, item) => total + item.price * item.quantity, 0)
+// const cartTotal = cart.reduce((total, item) => total + item.price * item.quantity, 0)
 
-const removeAllItems = () => {
-  console.log('Before:', cartStore.cart);
-  cartStore.emptyingTheCart()
-  console.log('After:', cartStore.cart);
-}
+// const removeAllItems = () => {
+//   console.log('Before:', cartStore.cart);
+//   cartStore.emptyingTheCart()
+//   console.log('After:', cartStore.cart);
+// }
 
-const productQuantity = ref(1); // Replace with actual product quantity
-const maxProductQuantity = ref(10) // 10 for example
-const decrementProductQuantity = () => {
-  if (productQuantity.value > 1) {
-    productQuantity.value--;
-  }
-}
-const incrementProductQuantity = () => {
-  if (productQuantity.value < maxProductQuantity.value) {
-    productQuantity.value++;
-  }
-}
+// const productQuantity = ref(1); // Replace with actual product quantity
+// const maxProductQuantity = ref(10) // 10 for example
+// let itemInCart = ref({})
+// const decrementProductQuantity = (product) => {
+  // itemInCart.value = product
 
-</script>
+  // if (product.quantity > 1) {
+  //   // this line of decrement for render the decrement
+  //   itemInCart.value.quantity--;
+  //   // and this for actual decrement in local storage
+  //   let existingProduct = cart.find((product) => product.id === product.id);
+  //   // cart
+  //   existingProduct.quantity = itemInCart.value.quantity
+  //   localStorage.setItem('cart', JSON.stringify(existingProduct))
 
-<template>
+  //   // console.log(cart);
+  // }
+// }
+// const incrementProductQuantity = (product) => {
+//   // if (product.quantity < maxProductQuantity.value) {
+  
+//   let cartItem = cart.filter((item) => item.id == product.id)[0]
+//   cartItem.quantity++
+//   localStorage.setItem('cart', JSON.stringify(cartItem))
+  // console.log(cartItem)
+// }
 
-  <div class="cart" :class="{'empty-cart': cartLength == 0}">
+
+// Template
+/*
+
+Template
+ <div class="cart" :class="{'empty-cart': cartLength == 0}">
     <div class="cart-wrapper" v-if="cartLength > 0">
 
       <div>
@@ -61,9 +79,10 @@ const incrementProductQuantity = () => {
             <div class="qty-box">
               <div class="item-qty">
                 <!-- the values [1,10] representing [min,max] values if there is a condition to such thing -->
-                <span class="minus" @click="item.quantity > 1 ? item.quantity-- : 0">-</span>
-                <span class="value">{{  item.quantity }}</span>
-                <span class="plus" @click="item.quantity < 10 ? item.quantity++ : 10">+</span>
+                <span class="minus" @click="decrementProductQuantity(item)">-</span>
+                <span class="value">{{   item.quantity }}</span> 
+                <!-- itemInCart.value ? itemInCart.value : item.quantity  -->
+                <span class="plus" @click="incrementProductQuantity(item)">+</span>
               </div>
             </div>
   
@@ -88,6 +107,13 @@ const incrementProductQuantity = () => {
     </div>
 
   </div>
+
+*/
+</script>
+
+<template>
+
+ 
 
 </template>
 
