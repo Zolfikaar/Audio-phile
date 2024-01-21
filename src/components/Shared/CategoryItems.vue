@@ -1,23 +1,28 @@
 <script setup>
 import { onMounted } from 'vue'
 
-// const props = defineProps({
-//   categoryData: {
-//     type: Object
-//   }
-// })
+const props = defineProps({
+  categoryData: {
+    type: Object,
+    required: true
+  },
+  categoryName: {
+    type: String,
+    required: true
+  }
+})
 
-onMounted(async() => {
-  // console.log(props.categoryData[0].category);
+onMounted(() => {
+  
 })
 
 </script>
 
 <template>
-  <!-- <div class="category-content">
+  <div class="category-content">
 
     <div class="category-header">
-      <h1>{{ props.categoryData[0].category }}</h1>
+      <h1>{{ props.categoryName }}</h1>
     </div>
 
     <div class="wrapper">
@@ -43,7 +48,7 @@ onMounted(async() => {
 
     </div>
 
-  </div> -->
+  </div>
 </template>
 
 

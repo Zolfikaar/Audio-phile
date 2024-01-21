@@ -1,18 +1,16 @@
 <script setup>
+import { onMounted,ref } from 'vue'
+import { useProductsStore } from '@/stores/productsStore'
 import CategoriesComp from '@/components/shared/CategoriesComp.vue'
 import BestGearComp from '@/components/Shared/BestGearComp.vue'
-import CategoryItems from '../components/Shared/CategoryItems.vue'
+import CategoryItems from '@/components/Shared/CategoryItems.vue'
 
-import { onMounted,ref } from 'vue'
 
-// const props = defineProps({
-//   speakersData: {
-//     type: Object
-//   }
-// })
+const speakersData = ref(useProductsStore().speakers)
+const categoryName = ref(useProductsStore().headphones[0].category)
 
-onMounted(async() => {
-  // console.log(props.speakersData);
+onMounted(async  () => {
+  useProductsStore().getProducts()
 })
 
 
@@ -20,8 +18,7 @@ onMounted(async() => {
 <template>
   <div class="speaker">
       
-    <!-- <CategoryItems :categoryData="props.speakersData"/> -->
-    <CategoryItems/>
+    <CategoryItems class="category" :categoryData="speakersData" :categoryName="categoryName"/>
           
     <CategoriesComp />
 

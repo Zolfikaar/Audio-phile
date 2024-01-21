@@ -9,7 +9,27 @@ import { onMounted,ref } from 'vue';
 import { useProductsStore } from '@/stores/productsStore'
 import { useCartStore } from '@/stores/cartStore'
 
-const products = useProductsStore.getProducts
+const products = ref({})
+
+onMounted(async  () => {
+  useProductsStore().getProducts()
+
+  products.value = useProductsStore().products
+
+
+  // getProductsData()
+})
+
+// const getProductsData = async () => {
+//   try {
+//     let data = await useProductsStore().getProducts();
+//     console.log(data);
+//   } catch (error) {
+//     console.error('Error fetching products:', error);
+//   }
+// }
+// console.log(useProductsStore.getProducts);
+// console.log(products.value);
 
 // const props = defineProps({
 //   filteredData: {
@@ -24,6 +44,7 @@ const products = useProductsStore.getProducts
 
 
 // let allData = ref({})
+
 
 // onMounted( async () => {
 //   getAllData()
@@ -56,9 +77,7 @@ const products = useProductsStore.getProducts
 //       }
 
 //     } catch (error) {
-
 //       console.error("Error loading data:", error);
-
 //     }
 //   }
 // }
