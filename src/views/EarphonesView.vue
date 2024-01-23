@@ -7,7 +7,7 @@ import CategoryItems from '@/components/Shared/CategoryItems.vue'
 
 
 const earphonesData = ref(useProductsStore().earphones)
-const categoryName = ref(useProductsStore().headphones[0].category)
+const categoryName = ref(useProductsStore().earphones[0].category)
 
 
 onMounted(async  () => {

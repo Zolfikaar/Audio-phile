@@ -9,13 +9,10 @@ import { onMounted,ref } from 'vue';
 import { useProductsStore } from '@/stores/productsStore'
 import { useCartStore } from '@/stores/cartStore'
 
-const products = ref({})
+const products = ref(useProductsStore().products)
 
 onMounted(async  () => {
   useProductsStore().getProducts()
-
-  products.value = useProductsStore().products
-
 
   // getProductsData()
 })

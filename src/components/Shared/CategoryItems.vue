@@ -39,7 +39,7 @@ onMounted(() => {
             <span class="new overline" v-if="product.new">New Product</span>
             <h1>{{ product.name }}</h1>
             <p class="desc">{{ product.description }}</p>
-            <button class="btn1"><router-link :to="'/product/' + product.slug">See Product</router-link></button>
+            <router-link :to="'/product/' + product.slug"><button class="btn1">See Product</button></router-link>
           </div>
           
         </div>

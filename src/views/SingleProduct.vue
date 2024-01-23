@@ -1,109 +1,45 @@
 <script setup>
+import { onMounted,ref } from 'vue'
+import { useProductsStore } from '@/stores/productsStore'
+import { useCartStore } from '@/stores/cartStore'
 import CategoriesComp from '@/components/shared/CategoriesComp.vue'
 import BestGearComp from '@/components/Shared/BestGearComp.vue'
-import { onMounted,ref } from 'vue'
 
-import { useCartStore } from '@/stores/cartStore'
-
+const products = ref(useProductsStore().products)
 const cartStore = useCartStore()
-// let cart = JSON.parse(localStorage.getItem('products'))
 
-// const props = defineProps({
-//   slug:{
-//     type: String
-//   },
-// })
+const props = defineProps({
+  slug:{
+    type: String
+  },
+})
 
-// const product = ref({})
-// onMounted(async() => {
-//   let currentProduct = JSON.parse(localStorage.getItem('products')).filter(item => item.slug == props.slug)
-//   product.value = currentProduct[0]
+const product = ref({})
+onMounted(async() => {
+  let currentProduct = products.value.filter(item => item.slug == props.slug)[0]
+  product.value = currentProduct
+})
 
-//   // console.log(cart);
-// })
 
-// const addToCart = (item, itemQty) => {
-//   // trim product name from unnessery words for proper cart design 
-//   let wordsToRemove = ['Headphones','Speaker','Wireless' ,'Earphones']
-//   let trimedName = item.name
-
-//   wordsToRemove.forEach((word) => {
-//     trimedName.includes(word)
-//     trimedName = trimedName.replace(word, '')
-//   })
-
-//   let itemData = {
-//     id: item.id,
-//     name: trimedName, 
-//     price: item.price,
-//     image: item.image.mobile,
-//     quantity: itemQty
-//   }
-
-//   let currentItemIndex = cart.findIndex((ele) => ele.id === itemData.id);
-
-//   if (currentItemIndex === -1) {
-//     // Item not found in the cart, so add it
-//     cart.push(itemData);
-//   } else {
-//     // Item found in the cart, update its quantity
-//     cart[currentItemIndex].quantity += itemQty;
-//   }
-
-// }
-
-// const addToCart = (item, itemQty) => {
-//   // trim product name from unnessery words for proper cart design 
-//   let wordsToRemove = ['Headphones', 'Speaker', 'Wireless', 'Earphones'];
-//   let trimedName = item.name.replaceAll(wordsToRemove.join('|'), '');
-
-//   // Ensure cart is initialized as an array
-//   let cart = JSON.parse(localStorage.getItem('cart')) || [];
-
-// // console.log(cart);
-//   let existingProduct = cart.filter((product) => product.id === item.id);
-
-//   if (existingProduct) {
-//     existingProduct.quantity = itemQty;
-//   } else {
-//     let itemData = {
-//       id: item.id,
-//       name: trimedName,
-//       price: item.price,
-//       image: item.image.mobile,
-//       quantity: itemQty,
-//     };
-
-//     cart.push(itemData);
-//   }
-
-//   // Update localStorage
-//   localStorage.setItem('cart', JSON.stringify(cart));
-
-// }
-
-// these two + [min value if wanted] should be in the store for more robust build
-// const productQuantity = ref(1); // Replace with actual product quantity
-// const maxProductQuantity = ref(10) // 10 for example
-// const decrementProductQuantity = () => {
-//   if (productQuantity.value > 1) {
-//     productQuantity.value--;
-//   }
-// }
-// const incrementProductQuantity = () => {
-//   if (productQuantity.value < maxProductQuantity.value) {
-//     productQuantity.value++;
-//   }
-// }
+const productQuantity = ref(1)
+const maxProductQuantity = ref(10)
+const incrementProductQuantity = () => {
+  if (productQuantity.value < maxProductQuantity.value) {
+    productQuantity.value++;
+  }
+}
+const decrementProductQuantity = () => {
+  if (productQuantity.value > 1) {
+    productQuantity.value--;
+  }
+}
 
 const addToCart = cartStore.addToCart
-// const cartCount = ref()
-// cartCount.value = cartStore.cartCount
 </script>
 
 <template>
 
-<!-- <div class="wrapper">
+<div class="wrapper">
   <a class="backBtn-anchor" @click="$router.go(-1)">
     <span class="backBtn">Go Back</span>
   </a>
@@ -184,7 +120,7 @@ const addToCart = cartStore.addToCart
   </div>
 
   
-</div> -->
+</div>
 
 <div>{{ cartStore.cartCount }}</div>
 <button @click="addToCart">Add to cart</button>
