@@ -20,7 +20,6 @@ onMounted(async() => {
   product.value = currentProduct
 })
 
-
 const productQuantity = ref(1)
 const maxProductQuantity = ref(10)
 const incrementProductQuantity = () => {
@@ -74,10 +73,6 @@ const addToCart = cartStore.addToCart
     <div class="features-box">
       <h3>features</h3>
       <p>{{ product.features }}</p>
-      
-      
-
-
     </div>
     <div class="in-the-box">
       <h3>In the Box</h3>

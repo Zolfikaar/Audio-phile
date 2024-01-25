@@ -1,96 +1,67 @@
 <script setup>
-import {onMounted, watch, ref} from 'vue'
-import { storeToRefs } from 'pinia';
+import {onMounted, ref} from 'vue'
 import { useCartStore } from '@/stores/cartStore'
 
-const cartStore = useCartStore()
-// const cart = JSON.parse(localStorage.getItem('cart')) // cartStore.cart
-// const cartLength = cart.length // cartStore.cart.length
+let cart = ref()
+let cartLength = ref()
+let cartTotal = ref()
+const maxProductQuantity = ref(10)
+const removeAllItems = useCartStore().emptyingTheCart
 
-// let cartLS = JSON.parse(localStorage.getItem('cart'))
+onMounted(async () => {
+ cart.value = JSON.parse(localStorage.getItem('cart'))
+ cartLength.value = await cart.value !== null ? cart.value.length : 0
+ cartTotal.value = cart.value !== null ? cart.value.reduce((total, item) => total + item.price * item.quantity, 0) : 0
 
-onMounted(() => {
-  // console.log();
-  // console.log(cart);
 })
-  
-// const cartTotal = cart.reduce((total, item) => total + item.price * item.quantity, 0)
 
-// const removeAllItems = () => {
-//   console.log('Before:', cartStore.cart);
-//   cartStore.emptyingTheCart()
-//   console.log('After:', cartStore.cart);
-// }
+const decrementProductQuantity = (item) => {
+  if(item.quantity > 1) {
+    let currentItem = cart.value.filter((product) => product.id == item.id)[0];
+    currentItem.quantity--
+    localStorage.setItem('cart',JSON.stringify(cart.value))
+  }
 
-// const productQuantity = ref(1); // Replace with actual product quantity
-// const maxProductQuantity = ref(10) // 10 for example
-// let itemInCart = ref({})
-// const decrementProductQuantity = (product) => {
-  // itemInCart.value = product
+}
+const incrementProductQuantity = (item) => {
+  if(item.quantity < maxProductQuantity.value) {
+    let currentItem = cart.value.filter((product) => product.id == item.id)[0];
+    currentItem.quantity++
+    localStorage.setItem('cart',JSON.stringify(cart.value))
+  }
+}
+</script>
 
-  // if (product.quantity > 1) {
-  //   // this line of decrement for render the decrement
-  //   itemInCart.value.quantity--;
-  //   // and this for actual decrement in local storage
-  //   let existingProduct = cart.find((product) => product.id === product.id);
-  //   // cart
-  //   existingProduct.quantity = itemInCart.value.quantity
-  //   localStorage.setItem('cart', JSON.stringify(existingProduct))
+<template>
 
-  //   // console.log(cart);
-  // }
-// }
-// const incrementProductQuantity = (product) => {
-//   // if (product.quantity < maxProductQuantity.value) {
-  
-//   let cartItem = cart.filter((item) => item.id == product.id)[0]
-//   cartItem.quantity++
-//   localStorage.setItem('cart', JSON.stringify(cartItem))
-  // console.log(cartItem)
-// }
-
-
-// Template
-/*
-
-Template
- <div class="cart" :class="{'empty-cart': cartLength == 0}">
+<div class="cart" :class="{'empty-cart': cartLength == 0}">
     <div class="cart-wrapper" v-if="cartLength > 0">
-
       <div>
         <div class="cart-header">
           <h6>CART ({{ cartLength }})</h6>
           <span class="remove-all" @click="removeAllItems">Remov All</span>
         </div>
         <div class="cart-items">
-          <div class="cart-item" v-for="item in cart">
-  
+          <div class="cart-item" v-for="(item) in cart" :key="item">
             <div class="info-box">
               <div class="item-image">
                 <img :src="'/src/' + item.image" alt="">
               </div>
-  
               <div class="item-info">
                 <span class="item-name">{{ item.name }}</span>
                 <span class="item-price">${{ item.price }}</span>
               </div>
             </div>
-  
             <div class="qty-box">
               <div class="item-qty">
-                <!-- the values [1,10] representing [min,max] values if there is a condition to such thing -->
                 <span class="minus" @click="decrementProductQuantity(item)">-</span>
-                <span class="value">{{   item.quantity }}</span> 
-                <!-- itemInCart.value ? itemInCart.value : item.quantity  -->
+                <div class="value">{{ item.quantity }}</div>
                 <span class="plus" @click="incrementProductQuantity(item)">+</span>
               </div>
             </div>
-  
           </div>
         </div>
       </div>
-      
-
       <div>
         <div class="cart-total">
           <span>TOTAL</span>
@@ -98,22 +69,13 @@ Template
         </div>
         <button class="btn1 checkout-btn"><router-link to="">Checkout</router-link></button>
       </div>
-
-
     </div>
 
     <div class="" v-else>
       <h3>Shopping Cart is Empty</h3>
     </div>
 
-  </div>
-
-*/
-</script>
-
-<template>
-
- 
+</div>
 
 </template>
 

@@ -6,6 +6,8 @@ export const useCartStore = defineStore("cart", {
   state: () => ({
     isOpen: false,
     cart: [],
+    productQuantity: null,
+    maxProductQuantity: ref(10),
   }),
 
   actions: {
@@ -15,6 +17,7 @@ export const useCartStore = defineStore("cart", {
 
     emptyingTheCart() {
       this.cart = [];
+      localStorage.removeItem("cart");
     },
 
     addToCart(item, itemQty) {
@@ -57,5 +60,18 @@ export const useCartStore = defineStore("cart", {
 
       return itemData;
     },
+
+    decrementProductQtyInCart(item) {},
+    // incrementProductQtyInCart(item) {
+    //   let lsCart = JSON.parse(localStorage.getItem("cart"));
+    //   this.cart = lsCart;
+    //   let currentItem = this.cart.filter((product) => product.id == item.id)[0];
+    //   this.productQuantity = currentItem.quantity;
+    //   currentItem.quantity++;
+    //   this.productQuantity++;
+    //   localStorage.setItem("cart", JSON.stringify(this.cart));
+    //   // console.log(currentItem);
+    //   console.log(this.productQuantity);
+    // },
   },
 });
