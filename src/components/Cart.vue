@@ -67,7 +67,7 @@ const incrementProductQuantity = (item) => {
           <span>TOTAL</span>
           <span>${{ cartTotal }}</span>
         </div>
-        <button class="btn1 checkout-btn"><router-link to="">Checkout</router-link></button>
+        <router-link :to="{name: 'checkout'}"><button class="btn1 checkout-btn">Checkout</button></router-link>
       </div>
     </div>
 

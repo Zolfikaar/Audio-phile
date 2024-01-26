@@ -1,6 +1,4 @@
 <script setup>
-import { onMounted } from 'vue'
-
 const props = defineProps({
   categoryData: {
     type: Object,
@@ -11,11 +9,6 @@ const props = defineProps({
     required: true
   }
 })
-
-onMounted(() => {
-  
-})
-
 </script>
 
 <template>

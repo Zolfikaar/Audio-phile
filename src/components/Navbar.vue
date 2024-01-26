@@ -1,11 +1,4 @@
 <script setup>
-import { onMounted,ref } from 'vue'
-
-
-
-// onMounted(async() => {
-  // })
-  
 let activeNav = ''
 const changeActiveNav = (nav) => activeNav = nav
 

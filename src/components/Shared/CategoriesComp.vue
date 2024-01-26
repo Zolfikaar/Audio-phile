@@ -1,43 +1,40 @@
 <template>
 
 <div class="categories-section">
-      <div class="wrapper">
-        <div class="category-boxes">
+  <div class="wrapper">
+    <div class="category-boxes">
 
-          <router-link :to="{name: 'headphones'}">
-            <div class="category-box">
-                <img src="@/assets/shared/desktop/image-category-thumbnail-headphones.png" alt="headphones category">
-                <h4 class="category-title">Headphones</h4>
-                <button class="btn3">Shop <span class="arrow">></span></button>
-            </div>
-          </router-link>
-
-          <RouterLink :to="{name: 'speakers'}">
-            <div class="category-box">
-              <img src="@/assets/shared/desktop/image-category-thumbnail-speakers.png" alt="speakers category">
-              <h4 class="category-title">Speakers</h4>
-              <button class="btn3">Shop <span class="arrow">></span></button>
-            </div>
-          </RouterLink>
-
-          <RouterLink :to="{name: 'earphones'}">
-            <div class="category-box">
-              <img src="@/assets/shared/desktop/image-category-thumbnail-earphones.png" alt="earphones category">
-              <h4 class="category-title">Earphones</h4>
-              <button class="btn3">Shop <span class="arrow">></span></button>
-            </div>
-          </RouterLink>
+      <router-link :to="{name: 'headphones'}">
+        <div class="category-box">
+            <img src="@/assets/shared/desktop/image-category-thumbnail-headphones.png" alt="headphones category">
+            <h4 class="category-title">Headphones</h4>
+            <button class="btn3">Shop <span class="arrow">></span></button>
         </div>
-      </div>
+      </router-link>
+
+      <RouterLink :to="{name: 'speakers'}">
+        <div class="category-box">
+          <img src="@/assets/shared/desktop/image-category-thumbnail-speakers.png" alt="speakers category">
+          <h4 class="category-title">Speakers</h4>
+          <button class="btn3">Shop <span class="arrow">></span></button>
+        </div>
+      </RouterLink>
+
+      <RouterLink :to="{name: 'earphones'}">
+        <div class="category-box">
+          <img src="@/assets/shared/desktop/image-category-thumbnail-earphones.png" alt="earphones category">
+          <h4 class="category-title">Earphones</h4>
+          <button class="btn3">Shop <span class="arrow">></span></button>
+        </div>
+      </RouterLink>
     </div>
+  </div>
+</div>
   
 </template>
 
 <style scoped>
-.categories-section{
-  margin: 100px 0;
-  
-}
+.categories-section{margin: 100px 0;}
 .categories-section .category-boxes{
   display: flex;
   justify-content: space-between;
@@ -74,7 +71,5 @@
   font-size: 16px;
   font-weight: bold;
 }
-.categories-section .category-boxes a:hover .category-box button {
-  color: var(--main-orang);
-}
+.categories-section .category-boxes a:hover .category-box button {color: var(--main-orang);}
 </style>
