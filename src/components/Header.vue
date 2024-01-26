@@ -1,8 +1,11 @@
 <script setup>
+import { useRoute } from 'vue-router'
 import Navbar from '@/components/Navbar.vue'
 import { useCartStore } from '@/stores/cartStore'
 
-const toggleCart = useCartStore().toggleCart
+const route = useRoute();
+// prevent shopping cart from showing at checkout page
+const toggleCart = () => (route.name !== 'checkout' ? useCartStore().toggleCart() : undefined);
 
 </script>
 <template>

@@ -65,7 +65,7 @@ const incrementProductQuantity = (item) => {
       <div>
         <div class="cart-total">
           <span>TOTAL</span>
-          <span>${{ cartTotal }}</span>
+          <span>${{ cartTotal.toLocaleString() }}</span>
         </div>
         <router-link :to="{name: 'checkout'}"><button class="btn1 checkout-btn">Checkout</button></router-link>
       </div>
@@ -138,7 +138,7 @@ const incrementProductQuantity = (item) => {
   font-size: 15px;
 }
 .cart-wrapper .cart-total span:nth-child(2){font-weight: bold;font-size: 18px;}
-.cart-wrapper .checkout-btn{width: 100%;}
+.cart-wrapper .checkout-btn{width: 100%; margin-bottom: 20px;}
 .cart-wrapper .cart-items .cart-item .qty-box .item-qty{
   width: 96px;
   height: 32px;

@@ -1,5 +1,23 @@
 <script setup>
+import {ref,onMounted} from 'vue'
 import iconCashOn from '@/components/icons/iconCashOn.vue'
+
+let cart = ref([]);
+let total = ref(0);
+let shipping = ref(50);
+let vat = ref(0);
+let grandTotal = ref(0);
+
+onMounted(async () => {
+  const storedCart = localStorage.getItem('cart');
+  if (storedCart) {
+    cart.value = JSON.parse(storedCart)
+    total.value = cart.value.reduce((acc, item) => acc + item.price * item.quantity, 0)
+    // Calculate VAT based on 20% of the product total (excluding shipping)
+    vat.value = Math.floor((total.value - shipping.value) * 0.2)
+    grandTotal.value = total.value + shipping.value + vat.value
+  }
+})
 </script>
 
 <template>
@@ -98,7 +116,55 @@ import iconCashOn from '@/components/icons/iconCashOn.vue'
         </div>
 
         <div class="cart-summary">
-          cart summary
+          <div class="cart">
+            <div class="cart-wrapper">
+              <div>
+                <div class="cart-header">
+                  <h6>Summary</h6>
+                </div>
+                <div class="cart-items">
+                  <div class="cart-item" v-for="item in cart" :key="item">
+                    <div class="info-box">
+                      <div class="item-image">
+                        <img :src="'/src/' + item.image" alt="">
+                      </div>
+                      <div class="item-info">
+                        <span class="item-name">{{ item.name }}</span>
+                        <span class="item-price">${{ item.price }}</span>
+                      </div>
+                    </div>
+                    <div class="qty-box">
+                      x{{ item.quantity }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="totals">
+                <div class="total">
+                  <span>TOTAL</span>
+                  <span>${{ total.toLocaleString() }}</span>
+                </div>
+                <div class="shipping">
+                  <span>SHIPPING</span>
+                  <span>${{ shipping }}</span>
+                </div>
+                <div class="vat">
+                  <span>VAT(INCLUDED)</span>
+                  <span>${{ vat.toLocaleString() }}</span>
+                </div>
+                <div class="grand-total">
+                  <span>GRAND TOTAL</span>
+                  <span>${{ grandTotal.toLocaleString() }}</span>
+                </div>
+                <button class="btn1 pay-btn">CONTINUE & PAY</button>
+              </div>
+
+            </div>
+
+            
+
+        </div>
         </div>
 
       </div>
@@ -109,6 +175,9 @@ import iconCashOn from '@/components/icons/iconCashOn.vue'
 </template>
 
 <style >
+/* ========================================================== */
+/* ==================== Checkout Form ======================= */
+/* ========================================================== */
 #app.checkout-page{background-color: #f1f1f1 !important;}
 .checkout-page .checkout-header{margin: 50px 0;}
 .checkout-page .checkout-content{
@@ -231,5 +300,68 @@ import iconCashOn from '@/components/icons/iconCashOn.vue'
 .checkout-page .checkout-content .checkout-form form .form-group.on-delivery-info,
 .checkout-page .checkout-content .checkout-form form .form-group.emoney-info{margin: 30px 0;}
 
+/* ========================================================== */
+/* ==================== Cart Summary ======================== */
+/* ========================================================== */
 
+.cart-summary{height: fit-content;}
+.cart-summary .cart{
+  width: 377px;
+  height: unset;
+  border-radius: 10px;
+  padding: 35px;
+  background-color: #fff;
+  position: unset;
+  overflow-x: hidden;
+}
+.cart-summary .cart .cart-wrapper{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.cart-summary .cart .cart-wrapper .cart-items{margin: 30px 0;}
+.cart-summary .cart .cart-wrapper .cart-items .cart-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px 0;
+}
+.cart-summary .cart .cart-wrapper .cart-items .cart-item .info-box{display: flex;align-items: center;}
+.cart-summary .cart .cart-wrapper .cart-items .cart-item .info-box .item-image{
+  width: 64px;
+  height: 64px;
+  margin-right: 10px;
+}
+.cart-summary .cart .cart-wrapper .cart-items .cart-item .info-box .item-image img{
+  width: 64px;
+  height: 64px;
+  border-radius: 10px;
+  background-size: cover;
+}
+.cart-summary .cart .cart-wrapper .cart-items .cart-item .info-box .item-info .item-name,
+.cart-summary .cart .cart-wrapper .cart-items .cart-item .info-box .item-info .item-price{display: block;}
+.cart-summary .cart .cart-wrapper .cart-items .cart-item .info-box .item-info .item-name{font-weight: bold;font-size: 14px;}
+.cart-summary .cart .cart-wrapper .cart-items .cart-item .info-box .item-info .item-price{color: rgba(0, 0, 0,.5);font-size: 14px;}
+.cart-summary .cart .cart-wrapper .totals .total,
+.cart-summary .cart .cart-wrapper .totals .shipping,
+.cart-summary .cart .cart-wrapper .totals .vat,
+.cart-summary .cart .cart-wrapper .totals .grand-total{
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.cart-summary .cart .cart-wrapper .totals .total span:first-child,
+.cart-summary .cart .cart-wrapper .totals .shipping span:first-child,
+.cart-summary .cart .cart-wrapper .totals .vat span:first-child,
+.cart-summary .cart .cart-wrapper .totals .grand-total span:first-child{
+  color: rgba(0, 0, 0,.5);
+  font-size: 15px;
+}
+.cart-summary .cart .cart-wrapper .totals .grand-total span:nth-child(2){color: var(--main-orang);}
+.cart-summary .cart .cart-wrapper .totals .total span:nth-child(2){font-weight: bold;font-size: 18px;}
+.cart-summary .cart .cart-wrapper .totals .shipping span:nth-child(2){font-weight: bold;font-size: 18px;}
+.cart-summary .cart .cart-wrapper .totals .vat span:nth-child(2){font-weight: bold;font-size: 18px;}
+.cart-summary .cart .cart-wrapper .totals .grand-total span:nth-child(2){font-weight: bold;font-size: 18px;}
+.cart-summary .cart .cart-wrapper .pay-btn{width: 100%;}
 </style>
