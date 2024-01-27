@@ -18,6 +18,143 @@ onMounted(async () => {
     grandTotal.value = total.value + shipping.value + vat.value
   }
 })
+
+let paymentSelected = ref('cash')
+const changeSelectedPayment = (payment) => {
+  if(payment == 'emoney'){
+    paymentSelected.value = 'emoney'
+  } else {
+    paymentSelected.value = 'cash'
+  }
+}
+
+let name = ref('')
+let email = ref('')
+let phone = ref('')
+let address = ref('')
+let zip = ref('')
+let city = ref('')
+let country = ref('')
+let emoney_num = ref('')
+let emoney_pin = ref('')
+
+let emptyName = ref(false)
+let shortName = ref(false)
+
+let emptyEmail = ref(false)
+let notValidEmail = ref(false)
+
+let emptyPhoneNum = ref(false)
+let shortPhoneNum = ref(false)
+
+let emptyAddress = ref(false)
+let emptyZipCode = ref(false)
+let invalidZipCode = ref(false)
+let emptyCity = ref(false)
+let emptyCountry = ref(false)
+
+let emptyEmoneyNum = ref(false)
+let invalidEmoneyNum = ref(false)
+let emptyEmoneyPin = ref(false)
+let invalidEmoneyPin = ref(false)
+const handleCheckoutInfo = () => {
+
+  if(name.value === ''){
+    emptyName.value = true
+  } else if (name.value.length < 6) {
+    shortName.value = true
+    emptyName.value = false
+  } else {
+    emptyName.value = false
+    shortName.value = false
+  }
+
+  if(email.value === ''){
+    emptyEmail.value = true
+    notValidEmail.value = false
+  } else if (!isValidEmail(email.value)) {
+    notValidEmail.value = true
+    emptyEmail.value = false
+  } else {
+    emptyName.value = false
+    notValidEmail.value = false
+  }
+  
+  let phoneNumberLength = phone.value.toString().length
+  if(phone.value === ''){
+    emptyPhoneNum.value = true
+    shortPhoneNum.value = false
+  } else if(phoneNumberLength < 8) {
+    shortPhoneNum.value = true
+    emptyPhoneNum.value = false
+  } else {
+    emptyPhoneNum.value = false
+    shortPhoneNum.value = false
+  }
+
+  if(address.value === ''){
+    emptyAddress.value = true
+  } else {
+    emptyAddress.value = false
+  }
+
+  let zipCodeLength = zip.value.toString().length
+  if(zip.value === ''){
+    emptyZipCode.value = true
+    invalidZipCode.value = false
+  } else if(zipCodeLength !== 5){
+    invalidZipCode.value = true
+    emptyZipCode.value = false
+  } else {
+    emptyZipCode.value = false
+    invalidZipCode.value = false
+
+  }
+
+  if(city.value === '') {
+    emptyCity.value = true
+  }else{
+    emptyCity.value = false
+  }
+
+  if(country.value === '') {
+    emptyCountry.value = true
+  }else{
+    emptyCountry.value = false
+  }
+  
+  let EmoneyNumLength = emoney_num.value.toString().length
+  if(emoney_num.value === ''){
+    emptyEmoneyNum.value = true
+    invalidEmoneyNum.value = false
+  } else if(EmoneyNumLength !== 9){
+    invalidEmoneyNum.value = true
+    emptyEmoneyNum.value = false
+  } else {
+    emptyEmoneyNum.value = false
+    invalidEmoneyNum.value = false
+
+  }
+
+  let EmoneyPinLength = emoney_pin.value.toString().length
+  if(emoney_pin.value === ''){
+    emptyEmoneyPin.value = true
+    invalidEmoneyPin.value = false
+  } else if(EmoneyPinLength !== 4){
+    invalidEmoneyPin.value = true
+    emptyEmoneyPin.value = false
+  } else {
+    emptyEmoneyPin.value = false
+    invalidEmoneyPin.value = false
+
+  }
+}
+
+function isValidEmail(email) {
+  // Regular expression for a basic email format
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+}
 </script>
 
 <template>
@@ -38,17 +175,23 @@ onMounted(async () => {
             <div class="form-group">
               <div class="group-title">Billing Details</div>
               <div class="group">
-                <div class="group-item">
-                  <label>Name</label>
-                  <input type="text">
+                <div class="group-item" :class="emptyName || shortName ? 'error-state' : ''">
+                  <label>Name 
+                    <span class="error" v-if="emptyName || shortName">{{ emptyName ? "Can't be empty" : (shortName ? "Name is too short" : '') }}</span>
+                  </label>
+                  <input type="text" placeholder="Alexei Ward" v-model="name">
                 </div>
-                <div class="group-item error-state">
-                  <label>Email Address <span class="error">Wrong Format</span></label>
-                  <input type="email">
+                <div class="group-item" :class="emptyEmail || notValidEmail ? 'error-state' : ''">
+                  <label>Email Address
+                    <span class="error" v-if="emptyEmail || notValidEmail">{{ emptyEmail ? "Can't be empty" : (notValidEmail ? "Wrong format" : '') }}</span>
+                  </label>
+                  <input type="email" placeholder="alexei@mail.com" v-model="email">
                 </div>
-                <div class="group-item">
-                  <label>Phone Number</label>
-                  <input type="number">
+                <div class="group-item" :class="emptyPhoneNum || shortPhoneNum ? 'error-state' : ''">
+                  <label>Phone Number
+                    <span class="error" v-if="emptyPhoneNum || shortPhoneNum">{{ emptyPhoneNum ? "Can't be empty" : (shortPhoneNum ? "phone number is too short" : '') }}</span>
+                  </label>
+                  <input type="number" placeholder="+1 202-555-0136" v-model="phone">
                 </div>
               </div>
             </div>
@@ -56,21 +199,29 @@ onMounted(async () => {
             <div class="form-group">
               <div class="group-title">Shipping Info</div>
               <div class="group">
-                <div class="group-item address">
-                  <label>Address</label>
-                  <input type="text">
+                <div class="group-item address" :class="emptyAddress ? 'error-state': ''">
+                  <label>Address
+                    <span class="error" v-if="emptyAddress">{{ emptyAddress ? "Can't be empty" : '' }}</span>
+                  </label>
+                  <input type="text" placeholder="1137 Williams Avenue" v-model="address">
                 </div>
-                <div class="group-item zip-code">
-                  <label>Zip Code</label>
-                  <input type="number">
+                <div class="group-item zip-code" :class="emptyZipCode || invalidZipCode ? 'error-state': ''">
+                  <label>Zip Code
+                    <span class="error" v-if="emptyZipCode || invalidZipCode">{{ emptyZipCode ? "Can't be empty" : (invalidZipCode ? "Invalid zip code" : '') }}</span>
+                  </label>
+                  <input type="number" placeholder="10001" v-model="zip">
                 </div>
-                <div class="group-item">
-                  <label>City</label>
-                  <input type="text">
+                <div class="group-item" :class="emptyCity ? 'error-state': ''">
+                  <label>City
+                    <span class="error" v-if="emptyCity">{{ emptyCity ? "Can't be empty" : '' }}</span>
+                  </label>
+                  <input type="text" placeholder="New York" v-model="city">
                 </div>
-                <div class="group-item">
-                  <label>Country</label>
-                  <input type="text">
+                <div class="group-item" :class="emptyCountry ? 'error-state': ''">
+                  <label>Country
+                    <span class="error" v-if="emptyCountry">{{ emptyCountry ? "Can't be empty" : '' }}</span>
+                  </label>
+                  <input type="text" placeholder="United States" v-model="country">
                 </div>
               </div>
             </div>
@@ -80,11 +231,11 @@ onMounted(async () => {
               <div class="group-item">
                 <label>Payment Method</label>
                 <div class="payment-options">
-                  <div class="option ">
+                  <div class="option" :class="paymentSelected == 'emoney' ? 'checked' : '' " @click="changeSelectedPayment('emoney')">
                     <span class="checkbox"></span>
                     <span>e-Money</span>
                   </div>
-                  <div class="option checked">
+                  <div class="option" :class="paymentSelected == 'cash' ? 'checked' : '' " @click="changeSelectedPayment('cash')">
                     <span class="checkbox"></span>
                     <span>Cash on Delivery</span>
                   </div>
@@ -92,20 +243,24 @@ onMounted(async () => {
               </div>
             </div>
 
-            <div class="form-group emoney-info">
+            <div class="form-group emoney-info" v-if="paymentSelected == 'emoney'">
               <div class="group">
-                <div class="group-item">
-                  <label>e-Money Number</label>
-                  <input type="number">
+                <div class="group-item" :class="emptyEmoneyNum || invalidEmoneyNum ? 'error-state': ''">
+                  <label>e-Money Number
+                    <span class="error" v-if="emptyEmoneyNum || invalidEmoneyNum">{{ emptyEmoneyNum ? "Can't be empty" : (invalidEmoneyNum ? "Invalid number" : '') }}</span>
+                  </label>
+                  <input type="number" placeholder="238521993" v-model="emoney_num">
                 </div>
-                <div class="group-item">
-                  <label>e-Money Pin</label>
-                  <input type="number">
+                <div class="group-item" :class="emptyEmoneyPin || invalidEmoneyPin ? 'error-state': ''">
+                  <label>e-Money Pin
+                    <span class="error" v-if="emptyEmoneyPin || invalidEmoneyPin">{{ emptyEmoneyPin ? "Can't be empty" : (invalidEmoneyPin ? "Invalid pin" : '') }}</span>
+                  </label>
+                  <input type="number" placeholder="6891" v-model="emoney_pin">
                 </div>
               </div>
             </div>
             
-            <div class="form-group on-delivery-info">
+            <div class="form-group on-delivery-info" v-if="paymentSelected == 'cash'">
               <div class="icon">
                 <iconCashOn />
               </div>
@@ -157,12 +312,10 @@ onMounted(async () => {
                   <span>GRAND TOTAL</span>
                   <span>${{ grandTotal.toLocaleString() }}</span>
                 </div>
-                <button class="btn1 pay-btn">CONTINUE & PAY</button>
+                <button class="btn1 pay-btn" @click="handleCheckoutInfo">CONTINUE & PAY</button>
               </div>
 
             </div>
-
-            
 
         </div>
         </div>
@@ -185,14 +338,12 @@ onMounted(async () => {
   justify-content: space-between;
   margin-bottom: 50px;
 }
-.checkout-page .checkout-content .cart-summary{width: 35%;}
 .checkout-page .checkout-content .cart-summary,
 .checkout-page .checkout-content .checkout-form{
   border-radius: 10px;
   background-color: white;
 }
 .checkout-page .checkout-content .checkout-form{
-  width: 65%;
   margin-right: 30px;
   padding: 50px;
 }
@@ -299,7 +450,10 @@ onMounted(async () => {
 }
 .checkout-page .checkout-content .checkout-form form .form-group.on-delivery-info,
 .checkout-page .checkout-content .checkout-form form .form-group.emoney-info{margin: 30px 0;}
-
+.checkout-page .checkout-content .checkout-form form .form-group.on-delivery-info{display: flex;align-items: center;}
+.checkout-page .checkout-content .checkout-form form .form-group.on-delivery-info p{
+  margin-left: 20px;
+}
 /* ========================================================== */
 /* ==================== Cart Summary ======================== */
 /* ========================================================== */
