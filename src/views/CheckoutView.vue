@@ -1,8 +1,11 @@
 <script setup>
 import {ref,onMounted} from 'vue'
+import { useRouter } from 'vue-router'
+
 import iconCashOn from '@/components/icons/iconCashOn.vue'
 import iconCheck from '@/components/icons/iconCheck.vue'
 
+const router = useRouter()
 let cart = ref([]);
 let cartLength = ref()
 let shortView = ref(true)
@@ -79,11 +82,8 @@ const handleCheckoutInfo = () => {
 
   let validInfo = checkValidation(data)
 
-
-  if(!validInfo) {
-
+  if(validInfo) {
     showModal.value = true
-
   }
 
 }
@@ -219,6 +219,11 @@ const checkValidation = (data) => {
   }
 
   return checkoutInfoValid
+}
+
+const completeOrderGoHome = () => {
+  localStorage.removeItem('cart')
+  router.push({name:'home'})
 }
 </script>
 
@@ -402,58 +407,69 @@ const checkValidation = (data) => {
 
           <div class="cart-box-items" v-if="shortView">
             <div class="cart-box-item">
-              <div class="item-image">
-                <img :src="'/src/' + cart[0].image" alt="">
+              <div class="item-info">
+                <div class="item-other-info">
+                  <div class="item-image">
+                    <img :src="'/src/' + cart[0].image" alt="">
+                  </div>
+                  <div class="item-name-and-price">
+                    <div class="item-name">{{ cart[0].name }}</div>
+                    <div class="item-price">${{ cart[0].price.toLocaleString() }}</div>
+                  </div>
+                </div>
+                <div class="item-quantity">x{{ cart[0].quantity }}</div>
               </div>
-              <div class="item-name-and-price">
-                <div class="item-name">{{ cart[0].name }}</div>
-                <div class="item-price">${{ cart[0].price.toLocaleString() }}</div>
-              </div>
-              <div class="item-quantity">x{{ cart[0].quantity }}</div>
             </div>
           </div>
 
           <div class="cart-box-items" v-else>
             <div class="cart-box-item" v-for="item in cart" :key="item">
-              <div class="item-image">
-                <img :src="'/src/' + item.image" alt="">
+              <div class="item-info">
+                <div class="item-other-info">
+                  <div class="item-image">
+                    <img :src="'/src/' + item.image" alt="">
+                  </div>
+                  <div class="item-name-and-price">
+                    <div class="item-name">{{ item.name }}</div>
+                    <div class="item-price">${{ item.price.toLocaleString() }}</div>
+                  </div>
+                </div>
+                <div class="item-quantity">x{{ item.quantity }}</div>
               </div>
-              <div class="item-name-and-price">
-                <div class="item-name">{{ item.name }}</div>
-                <div class="item-price">${{ item.price.toLocaleString() }}</div>
-              </div>
-              <div class="item-quantity">x{{ item.quantity }}</div>
             </div>
           </div>
 
           <hr>
-          <div 
-            class="cart-box-footer" 
-            @click="shortView = !shortView" 
-            >
-            and 2 other item(s)
-            <!-- @click="shortView = !shortView" 
-            v-if="shortView ? `and ${cartLength - 1 } other ` +  `${(cartLength - 1) > 1 }` ? `item(s)` : `item`
-            : 'Show less'" -->
+
+          <div class="cart-box-footer" :class="cartLength == 1 ? 'no-more-items' : ''" v-if="cartLength == 1">
+            No other items
           </div>
+          <div class="cart-box-footer" v-else-if="shortView" @click="shortView = !shortView">
+            and {{ cartLength - 1 }} other item{{ cartLength - 1 > 1 ? 's' : '' }}
+          </div>
+          <div class="cart-box-footer" v-else @click="shortView = !shortView">
+            View less
+          </div>
+          
         </div>
         <div class="right-side">
           <div>GRAND TOTAL</div>
           <div>$ {{ grandTotal.toLocaleString() }}</div>
         </div>
       </div>
-      <router-link :to="{name: 'home'}"><button class="btn1">BACK TO HOME</button></router-link>
+      <button class="btn1" @click="completeOrderGoHome">BACK TO HOME</button>
     </div>
   </div>
 
 </template>
 
-<style >
+<style>
 /* ========================================================== */
 /* ==================== Checkout Form ======================= */
 /* ========================================================== */
 #app.checkout-page{background-color: #f1f1f1 !important;}
 .checkout-page .checkout-header{margin: 50px 0;}
+.checkout-page .checkout-header .backBtn-anchor{padding-top: unset !important;}
 .checkout-page .checkout-content{
   display: flex;
   justify-content: space-between;
@@ -664,39 +680,41 @@ const checkValidation = (data) => {
 .checkout-modal .cart-box{
   display: flex;
   justify-content: space-between;
-  /* align-items: center; */
   margin-bottom: 40px;
 }
 .checkout-modal .cart-box .left-side{
-  width: 55%;
+  width: 60%;
   background-color: var(--light-gray);
   padding: 20px;
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
 }
 .checkout-modal .cart-box .left-side hr{border-color: rgba(0, 0, 0,.2);}
-.checkout-modal .cart-box .left-side .cart-box-items{}
-.checkout-modal .cart-box .left-side .cart-box-items .cart-box-item{
+.checkout-modal .cart-box .left-side .cart-box-items .cart-box-item{margin: 10px;}
+.checkout-modal .cart-box .left-side .cart-box-items .cart-box-item .item-info{
   display: flex;
-  /* justify-content: space-between; */
+  justify-content: space-between;
 }
-.checkout-modal .cart-box .left-side .cart-box-items .cart-box-item .item-image{margin-right: 25px;}
-.checkout-modal .cart-box .left-side .cart-box-items .cart-box-item .item-image img{
+.checkout-modal .cart-box .left-side .cart-box-items .cart-box-item .item-info .item-other-info{
+  display: flex;
+  justify-content: space-between;
+}
+.checkout-modal .cart-box .left-side .cart-box-items .cart-box-item .item-info .item-image{margin-right: 25px;}
+.checkout-modal .cart-box .left-side .cart-box-items .cart-box-item .item-info .item-image img{
   width: 50px;
   height: 50px;
   background-size: cover;
   background-repeat: no-repeat;
 }
-.checkout-modal .cart-box .left-side .cart-box-items .cart-box-item .item-name-and-price{margin-right: 65px;}
-.checkout-modal .cart-box .left-side .cart-box-items .cart-box-item .item-name-and-price .item-name,
-.checkout-modal .cart-box .left-side .cart-box-items .cart-box-item .item-name-and-price .item-price,
-.checkout-modal .cart-box .left-side .cart-box-items .cart-box-item .item-quantity{
+.checkout-modal .cart-box .left-side .cart-box-items .cart-box-item .item-info .item-name-and-price .item-name,
+.checkout-modal .cart-box .left-side .cart-box-items .cart-box-item .item-info .item-name-and-price .item-price,
+.checkout-modal .cart-box .left-side .cart-box-items .cart-box-item .item-info .item-quantity{
   font-weight: bold;
   line-height: 25px;
 }
-.checkout-modal .cart-box .left-side .cart-box-items .cart-box-item .item-name-and-price .item-name{font-size: 15px;}
-.checkout-modal .cart-box .left-side .cart-box-items .cart-box-item .item-name-and-price .item-price{font-size: 14px;color: rgba(0, 0, 0,.5);}
-.checkout-modal .cart-box .left-side .cart-box-items .cart-box-item .item-quantity{text-align: right;color: rgba(0, 0, 0,.5);}
+.checkout-modal .cart-box .left-side .cart-box-items .cart-box-item .item-info .item-name-and-price .item-name{font-size: 15px;}
+.checkout-modal .cart-box .left-side .cart-box-items .cart-box-item .item-info .item-name-and-price .item-price{font-size: 14px;color: rgba(0, 0, 0,.5);}
+.checkout-modal .cart-box .left-side .cart-box-items .cart-box-item .item-info .item-quantity{text-align: right;color: rgba(0, 0, 0,.5);}
 
 .checkout-modal .cart-box .cart-box-footer{
   margin-top: 10px ;
@@ -707,11 +725,12 @@ const checkValidation = (data) => {
   font-weight: bold;
 }
 .checkout-modal .cart-box .cart-box-footer:hover{cursor: pointer;}
+.checkout-modal .cart-box .cart-box-footer.no-more-items:hover{cursor: unset;}
 .checkout-modal .cart-box .right-side{
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
   padding: 20px;
-  width: 45%;
+  width: 40%;
   background-color: black;
   color: #fff;
   display: flex;
@@ -731,5 +750,5 @@ const checkValidation = (data) => {
   color: #fff;
   margin-bottom: 20px;
 }
-.checkout-modal a button{width: 100%;}
+.checkout-modal button{width: 100%;}
 </style>

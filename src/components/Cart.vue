@@ -1,33 +1,47 @@
 <script setup>
-import {onMounted, ref} from 'vue'
+import {onMounted, ref,watch} from 'vue'
 import { useCartStore } from '@/stores/cartStore'
 
 let cart = ref()
 let cartLength = ref()
-let cartTotal = ref()
+let cartTotal = ref(0)
 const maxProductQuantity = ref(10)
 const removeAllItems = useCartStore().emptyingTheCart
 
-onMounted(async () => {
- cart.value = JSON.parse(localStorage.getItem('cart'))
- cartLength.value = await cart.value !== null ? cart.value.length : 0
- cartTotal.value = cart.value !== null ? cart.value.reduce((total, item) => total + item.price * item.quantity, 0) : 0
+const updateCartData = () => {
+  cartLength.value = cart.value.length;
+  cartTotal.value = calculateTotal();
+};
 
-})
+const calculateTotal = () => {
+  return cart.value.reduce((total, item) => total + item.price * item.quantity, 0);
+};
+
+onMounted(async () => {
+  // Initial setup
+  cart.value = JSON.parse(localStorage.getItem('cart')) || [];
+  updateCartData();
+});
+
+
+// Watch for changes in the cart variable
+watch(cart, updateCartData);
 
 const decrementProductQuantity = (item) => {
   if(item.quantity > 1) {
-    let currentItem = cart.value.filter((product) => product.id == item.id)[0];
-    currentItem.quantity--
-    localStorage.setItem('cart',JSON.stringify(cart.value))
+    let currentItem = cart.value.find((product) => product.id === item.id);
+    currentItem.quantity--;
+    localStorage.setItem('cart', JSON.stringify(cart.value));
+    updateCartData();
   }
 
 }
 const incrementProductQuantity = (item) => {
   if(item.quantity < maxProductQuantity.value) {
-    let currentItem = cart.value.filter((product) => product.id == item.id)[0];
-    currentItem.quantity++
-    localStorage.setItem('cart',JSON.stringify(cart.value))
+    let currentItem = cart.value.find((product) => product.id === item.id);
+    currentItem.quantity++;
+    localStorage.setItem('cart', JSON.stringify(cart.value));
+    updateCartData();
   }
 }
 </script>

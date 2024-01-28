@@ -10,6 +10,10 @@ export default {
   <footer>
 
     <div class="wrapper">
+      <div class="line"></div>
+    </div>
+
+    <div class="wrapper">
 
       <div class="footer-boxes">
           <div class="left-box">
@@ -52,9 +56,19 @@ export default {
 
 <style>
 footer{
-  padding: 100px 0;
+  padding-top: 50px;
+  padding-bottom: 50px;
   background-color: var(--main-black);
   color: white;
+  position: relative;
+}
+footer .line{
+  display: inline-block;
+  width: 100px;
+  height: 4px;
+  background-color: var(--main-orang);
+  position: absolute;
+  top: 0;
 }
 footer .footer-boxes{
   display: flex;

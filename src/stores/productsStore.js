@@ -38,7 +38,8 @@ export const useProductsStore = defineStore("products", {
           this.products = response.data.products;
           localStorage.setItem("products", JSON.stringify(this.products));
         } catch (error) {
-          console.error("Error loading data:", error);
+          // console.error("Error loading data:", error);
+          return error;
         }
       }
 

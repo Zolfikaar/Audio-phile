@@ -117,9 +117,6 @@ const addToCart = cartStore.addToCart
   
 </div>
 
-<div>{{ cartStore.cartCount }}</div>
-<button @click="addToCart">Add to cart</button>
-
 <CategoriesComp />
 
 <BestGearComp />

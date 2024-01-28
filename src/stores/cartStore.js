@@ -1,4 +1,3 @@
-// import { reactive, readonly } from "vue";
 import { defineStore } from "pinia";
 import { onMounted, ref } from "vue";
 
@@ -18,26 +17,32 @@ export const useCartStore = defineStore("cart", {
     emptyingTheCart() {
       this.cart = [];
       localStorage.removeItem("cart");
+      this.isOpen = false;
     },
 
     addToCart(item, itemQty) {
       let itemData = this.prepareProductData(item, itemQty);
 
-      let currentItemIndex = this.cart.findIndex(
+      // Check if there is existing cart data in local storage
+      let existingCart = JSON.parse(localStorage.getItem("cart")) || [];
+
+      let currentItemIndex = existingCart.findIndex(
         (ele) => ele.id === itemData.id
       );
 
       if (currentItemIndex === -1) {
-        // Item not found in the cart, so add it
-        this.cart.push(itemData);
-        localStorage.setItem("cart", JSON.stringify(this.cart));
+        // Item not found in the existing cart, add it
+        existingCart.push(itemData);
       } else {
-        // Item found in the cart, update its quantity
-        this.cart[currentItemIndex].quantity = itemQty;
-        localStorage.setItem("cart", JSON.stringify(this.cart));
+        // Item found in the existing cart, update its quantity
+        existingCart[currentItemIndex].quantity += itemQty;
       }
 
-      // console.log(itemData.name);
+      // Update the store's cart state
+      this.cart = existingCart;
+
+      // Update local storage
+      localStorage.setItem("cart", JSON.stringify(existingCart));
     },
 
     prepareProductData(item, itemQty) {
@@ -60,18 +65,5 @@ export const useCartStore = defineStore("cart", {
 
       return itemData;
     },
-
-    decrementProductQtyInCart(item) {},
-    // incrementProductQtyInCart(item) {
-    //   let lsCart = JSON.parse(localStorage.getItem("cart"));
-    //   this.cart = lsCart;
-    //   let currentItem = this.cart.filter((product) => product.id == item.id)[0];
-    //   this.productQuantity = currentItem.quantity;
-    //   currentItem.quantity++;
-    //   this.productQuantity++;
-    //   localStorage.setItem("cart", JSON.stringify(this.cart));
-    //   // console.log(currentItem);
-    //   console.log(this.productQuantity);
-    // },
   },
 });
