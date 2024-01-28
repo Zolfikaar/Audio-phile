@@ -148,12 +148,10 @@ button:hover{
 .btn4:hover{
   background-color: white;
   color: black;
-
 }
 .wrapper{
   width: 80%;
   margin: 0 auto;
-  
 }
 .navs ul{
   display: flex;
