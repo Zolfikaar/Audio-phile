@@ -139,6 +139,9 @@
     align-items: center;
     justify-content: space-evenly;
     height: 600px;
+    background-size: cover;
+    background-position-x: center;
+    background-position-y: top;
   }
   .top-products .top-products-box .box.zx9 .right-box{
     text-align: center;
@@ -151,12 +154,35 @@
     height: 207px;
     bottom: unset;
     left: unset;
-    margin-bottom: 50px;
+    margin-bottom: 0;
+    
   }
+  .top-products .top-products-box .box.zx9 .right-box h1{
+    font-size: 36px;
+    line-height: 40px;
+    letter-spacing: 1.29px;
+  }
+  .top-products .top-products-box .box.zx9 .right-box p{padding: 0 20px;}
 
   .top-products .top-products-box .box.zx7 .right-box.image-box{
-    /* background-image: url('/src/assets/home/mobile/image-speaker-zx7.jpg'); */
-    /* height: 320px; */
+    background-image: url('/src/assets/home/mobile/image-speaker-zx7.jpg');
+    height: 320px;
+  }
+  .top-products .top-products-box .box.zx7 .left-box{left: 30%;}
+  .top-products .top-products-box .box.yx1{
+    flex-direction: column;
+  }
+  .top-products .top-products-box .box.yx1 .left-box.image-box{
+    width: 100%; 
+    background-image: url('/src/assets/home/mobile/image-earphones-yx1.jpg');
+    height: 200px;
+    background-size: cover;
+  }
+  .top-products .top-products-box .box.yx1 .right-box{
+    margin-left: unset; 
+    width: 100%;
+    height: 200px;
+    margin-top: 20px;
   }
 }
 

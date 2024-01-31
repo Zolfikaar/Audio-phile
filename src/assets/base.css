@@ -179,10 +179,11 @@ button:hover{
 
 /* ----------- Mobile ----------- */
 @media only screen and (min-width: 350px) and (max-width: 600px) { 
-  
+
   .wrapper{
     width: 90%;
   }
+
 }
 
 /* ----------- Tablet ----------- */
