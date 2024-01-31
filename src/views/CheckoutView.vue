@@ -759,11 +759,44 @@ const completeOrderGoHome = () => {
 
 /* ----------- Mobile ----------- */
 @media only screen and (min-width: 350px) and (max-width: 600px) { 
-
+  .checkout-page .checkout-content {
+    flex-direction: column;
+  }
+  .checkout-page .checkout-content .checkout-form {
+    margin-right: unset;
+    margin-bottom: 30px;
+    padding: 30px 20px;
+  }
+  .checkout-page .checkout-content .checkout-form form .form-group .group {
+    display: unset;
+  }
+  .checkout-page .checkout-content .checkout-form form .form-group .group .group-item{
+    margin-right: unset;
+    width: 100%;
+  }
+  .checkout-page .checkout-content .checkout-form form .form-group.payment-details .group-item {
+    display: unset;
+  }
+  .checkout-page .checkout-content .checkout-form form .form-group.payment-details .group-item .payment-options {
+    width: 100%;
+  }
+  .checkout-page .checkout-content .cart-summary .cart{
+    width: 100%;
+    padding: 30px 20px;
+  }
 }
 
 /* ----------- Tablet ----------- */
 @media only screen and (min-width: 601px) and (max-width: 1024px) {
-
+  .checkout-page .checkout-content {
+    flex-direction: column;
+  }
+  .checkout-page .checkout-content .checkout-form {
+    margin-right: unset;
+    margin-bottom: 30px;
+  }
+  .checkout-page .checkout-content .cart-summary .cart{
+    width: 100%;
+  }
 }
 </style>
