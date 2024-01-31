@@ -182,11 +182,10 @@ const incrementProductQuantity = (item) => {
 
 /* ----------- Mobile ----------- */
 @media only screen and (min-width: 350px) and (max-width: 600px) { 
-
+  .cart{
+    width: 90%;
+    right: 5%;
+  }
 }
 
-/* ----------- Tablet ----------- */
-@media only screen and (min-width: 601px) and (max-width: 1024px) {
-
-}
 </style>

@@ -179,7 +179,7 @@
     background-size: cover;
   }
   .top-products .top-products-box .box.yx1 .right-box{
-    margin-left: unset; 
+    margin-left: unset;
     width: 100%;
     height: 200px;
     margin-top: 20px;

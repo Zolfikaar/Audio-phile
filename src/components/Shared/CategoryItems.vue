@@ -82,9 +82,6 @@ const props = defineProps({
   margin: 30px  0;
   width: 100%;
 }
-.category-content .products .product:nth-child(even) .product-info .desc{
-  /* padding-left: 50px; */
-}
 
 /* ----------------------------------------------- */
 /* ---------------- Media Queries ---------------- */
@@ -93,11 +90,47 @@ const props = defineProps({
 
 /* ----------- Mobile ----------- */
 @media only screen and (min-width: 350px) and (max-width: 600px) { 
-
+  .category-content .category-header h1{
+    font-size: 28px;
+    letter-spacing: 2px;
+  }
+  .category-content .products{flex-direction: column;}
+  .category-content .products .product:nth-child(even),
+  .category-content .products .product{
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .category-content .products .product:nth-child(even) .product-info,
+  .category-content .products .product .product-info{
+    align-items: center;
+    margin: 40px 0 0 0;
+    text-align: center;
+  }
+  .category-content .products .product .product-info h1{
+    font-size: 28px;
+    letter-spacing: 1px;
+  }
 }
 
 /* ----------- Tablet ----------- */
 @media only screen and (min-width: 601px) and (max-width: 1024px) {
-
+  .category-content .category-header h1{
+    font-size: 40px;
+    letter-spacing: 1.43px;
+  }
+  .category-content .products{flex-direction: column;}
+  .category-content .products .product:nth-child(even),
+  .category-content .products .product{
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .category-content .products .product:nth-child(even) .product-info,
+  .category-content .products .product .product-info{
+    align-items: center;
+    margin: 40px 90px 0 90px;
+    text-align: center;
+  }
 }
 </style>
