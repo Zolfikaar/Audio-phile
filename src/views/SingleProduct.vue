@@ -1,4 +1,4 @@
-<script setup>
+<!-- <script setup>
 import { onMounted,ref } from 'vue'
 import { useProductsStore } from '@/stores/productsStore'
 import { useCartStore } from '@/stores/cartStore'
@@ -20,6 +20,23 @@ onMounted(async() => {
   product.value = currentProduct
 })
 
+const getProductImage = (images) => {
+  // Check the screen width
+  const screenWidth = window.innerWidth;
+
+  // Choose the appropriate image based on the screen width
+  if (screenWidth >= 1024 && images?.desktop) {
+    return '/src/' + images.desktop;
+  } else if (screenWidth >= 350 && screenWidth <= 601 && images?.tablet) {
+    return '/src/' + images.tablet;
+  } else if (images?.mobile) {
+    return '/src/' + images.mobile;
+  } else {
+    // Provide a default image or placeholder if needed
+    return '/src/default-image.jpg';
+  }
+}
+
 const productQuantity = ref(1)
 const maxProductQuantity = ref(10)
 const incrementProductQuantity = () => {
@@ -34,7 +51,72 @@ const decrementProductQuantity = () => {
 }
 
 const addToCart = cartStore.addToCart
+</script> -->
+<script setup>
+import { ref, onMounted, onBeforeUnmount, defineProps } from 'vue';
+import { useProductsStore } from '@/stores/productsStore';
+import { useCartStore } from '@/stores/cartStore';
+import CategoriesComp from '@/components/shared/CategoriesComp.vue';
+import BestGearComp from '@/components/Shared/BestGearComp.vue';
+
+const products = ref(useProductsStore().products);
+const cartStore = useCartStore();
+
+const { slug } = defineProps(['slug']);
+
+const product = ref({});
+const productQuantity = ref(1);
+const maxProductQuantity = ref(10);
+
+onMounted(async () => {
+  let currentProduct = products.value.find((item) => item.slug === slug);
+  product.value = currentProduct;
+});
+
+const getProductImage = (images) => {
+  // Check the screen width
+  const screenWidth = ref(window.innerWidth);
+
+  // Choose the appropriate image based on the screen width
+  const updateScreenWidth = () => {
+    screenWidth.value = window.innerWidth;
+  };
+
+  onMounted(() => {
+    window.addEventListener('resize', updateScreenWidth);
+  });
+
+  onBeforeUnmount(() => {
+    window.removeEventListener('resize', updateScreenWidth);
+  });
+
+  if (screenWidth.value >= 1024 && images?.desktop) {
+    return '/src/' + images.desktop;
+  } else if (screenWidth.value >= 601 && screenWidth.value <= 1023 && images?.tablet) {
+    return '/src/' + images.tablet;
+  } else if (screenWidth.value >= 350 && screenWidth.value <= 600 && images?.mobile) {
+    return '/src/' + images.mobile;
+  } else {
+    // Provide a default image or placeholder if needed
+    return '/src/default-image.jpg';
+  }
+};
+
+const incrementProductQuantity = () => {
+  if (productQuantity.value < maxProductQuantity.value) {
+    productQuantity.value++;
+  }
+};
+
+const decrementProductQuantity = () => {
+  if (productQuantity.value > 1) {
+    productQuantity.value--;
+  }
+};
+
+const addToCart = cartStore.addToCart;
 </script>
+
 
 <template>
 
@@ -46,7 +128,7 @@ const addToCart = cartStore.addToCart
   <div class="product" >
 
     <div class="product-image">
-      <img :src="'/src/' + product.image?.desktop" alt="">
+      <img :src="getProductImage(product.categoryImage) " alt="">
     </div>
 
     <div class="product-info">
@@ -125,7 +207,6 @@ const addToCart = cartStore.addToCart
 <style>
 .backBtn-anchor{display: block; padding-top: 50px;}
 span.backBtn:hover{cursor: pointer;color: var(--main-orang);}
-
 .product{
   display: flex;
   margin: 50px 0;
@@ -245,11 +326,68 @@ span.backBtn:hover{cursor: pointer;color: var(--main-orang);}
 
 /* ----------- Mobile ----------- */
 @media only screen and (min-width: 350px) and (max-width: 600px) { 
-
+  .product{flex-direction: column;}
+  .product .product-image img{
+    width: 100%;
+    height: 327px;
+  }
+  .product .product-info{margin-left: unset;}
+  .product .product-info h1{
+    font-size: 28px;
+    letter-spacing: 1px;
+    line-height: normal;
+  }
+  .features{flex-direction: column;}
+  .features .features-box{width: 100%}
+  .features .in-the-box{width: 100%;margin-top: 50px;}
+  .gallery{flex-direction: column;}
+  .gallery .small .first, .gallery .small .second,
+  .gallery .small .first img, .gallery .small .second img{
+    width: 100%;
+    height: 174px;
+    margin-bottom: 20px;
+  }
+  .gallery .big .third,
+  .gallery .big .third img{
+    width: 100%;
+    height: 368px;
+  }
+  .other-products .items{flex-direction: column;}
+  .other-products .items .item{
+    height: 265px;
+    width: 100%;
+    margin-bottom: 60px;
+  }
+  .other-products .items .item .item-image{width: 100%;height: unset;}
+  .other-products .items .item .item-image img{
+    height: 120px;
+  }
 }
 
 /* ----------- Tablet ----------- */
 @media only screen and (min-width: 601px) and (max-width: 1024px) {
-
+  .product .product-image img{
+    width: 280px;
+    height: 480px;
+  }
+  .product .product-info{margin-left: 40px;}
+  .features{flex-direction: column;}
+  .features .in-the-box{width: 100%;margin-top: 50px; flex-direction: row;justify-content: space-between;}
+  .features .in-the-box .box-items{margin-right: 100px;}
+  .gallery .small .first, .gallery .small .second,
+  .gallery .small .first img, .gallery .small .second img{
+    width: 277px;
+    height: 174px;
+  }
+  .gallery .big .third,
+  .gallery .big .third img{
+    width: 395px;
+    height: 368px;
+  }
+  .other-products .items .item{height: 471;width: 223px;}
+  .other-products .items .item .item-image img{
+    width: 223px;
+    height: 318px;
+  }
 }
 </style>
