@@ -3,6 +3,7 @@ import { onMounted, ref } from "vue";
 
 export const useCartStore = defineStore("cart", {
   state: () => ({
+    menuOpen: false,
     isOpen: false,
     cart: [],
     productQuantity: null,
@@ -12,6 +13,9 @@ export const useCartStore = defineStore("cart", {
   actions: {
     toggleCart() {
       this.isOpen = !this.isOpen;
+    },
+    toggleMenu() {
+      this.menuOpen = !this.menuOpen;
     },
 
     emptyingTheCart() {

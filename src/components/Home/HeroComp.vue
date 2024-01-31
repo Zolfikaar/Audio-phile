@@ -14,7 +14,7 @@
           </div>
 
           <div class="product-image">
-            <img src="@/assets/home/desktop/image-hero.jpg" alt="image hero">
+            <img src="/src/assets/home/desktop/image-hero.jpg" alt="">
           </div>
 
         </div>
@@ -70,9 +70,56 @@
   color: white;
   text-decoration: none;
 }
+.product-box .product-image{height: 595px;width: 100%;}
 .product-box .product-image img{
   width: 100%;
   height: 595px;
   object-fit: cover;
+}
+
+/* ----------------------------------------------- */
+/* ---------------- Media Queries ---------------- */
+/* ----------------------------------------------- */
+
+
+/* ----------- Mobile ----------- */
+@media only screen and (min-width: 350px) and (max-width: 600px) { 
+
+  
+}
+
+/* ----------- Tablet ----------- */
+@media only screen and (min-width: 601px) and (max-width: 1024px) {
+  .hero-section{height: unset;}
+  .hero-section .product-box{
+    position: relative;
+    display: unset;
+  }
+  .hero-section .product-box .product-info{
+    z-index: 3;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,77%);
+    width: 100%;
+    text-align: center;
+  }
+  .hero-section .product-box .product-info .product-description{
+    width: 100%;
+    padding: 0 190px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+  }
+  .hero-section .product-box .product-info button{align-self: center;}
+  .hero-section .product-box .product-image{
+    z-index: 1;
+    position: relative;
+    /* top: 50%; */
+    left: 50%;
+    transform: translate(-50%,-74%);
+  }
+  .hero-section .product-box .product-image img{zoom: 1.4;}
+.product-box .product-image img{height: 730px;}
+
 }
 </style>

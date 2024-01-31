@@ -13,6 +13,10 @@ const router = createRouter({
       path: "/headphones",
       name: "headphones",
       component: () => import("@/views/HeadphonesView.vue"),
+      // beforeEnter(to, from, next) {
+      //   // hide shopping cart
+      //   useCartStore().menuOpen = false;
+      // },
     },
     {
       path: "/speakers",

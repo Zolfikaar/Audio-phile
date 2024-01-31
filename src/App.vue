@@ -17,7 +17,7 @@ onMounted(async () => useProductsStore().getProducts() )
   
   <Cart v-if="useCartStore().isOpen" />
   
-  <div id="app-overlay" v-if="useCartStore().isOpen"></div>
+  <div id="app-overlay" v-if="useCartStore().isOpen || useCartStore().menuOpen"></div>
   
   <RouterView />
   
@@ -32,5 +32,21 @@ onMounted(async () => useProductsStore().getProducts() )
   position: absolute;
   width: 100%;
   height: 98%;
+}
+
+/* ----------------------------------------------- */
+/* ---------------- Media Queries ---------------- */
+/* ----------------------------------------------- */
+
+
+/* ----------- Mobile ----------- */
+@media only screen and (min-width: 350px) and (max-width: 600px) { 
+  #app{overflow: hidden;}
+}
+
+/* ----------- Tablet ----------- */
+@media only screen and (min-width: 601px) and (max-width: 1024px) {
+  #app{overflow: hidden;}
+
 }
 </style>

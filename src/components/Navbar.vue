@@ -21,4 +21,19 @@ const changeActiveNav = (nav) => activeNav = nav
 .navs ul li a.router-link-exact-active{
   color: var(--main-orang);
 }
+
+/* ----------------------------------------------- */
+/* ---------------- Media Queries ---------------- */
+/* ----------------------------------------------- */
+
+
+/* ----------- Mobile ----------- */
+@media only screen and (min-width: 350px) and (max-width: 600px) { 
+  /* .navs{display: none;} */
+}
+
+/* ----------- Tablet ----------- */
+@media only screen and (min-width: 601px) and (max-width: 1024px) {
+  /* .navs{display: none;} */
+}
 </style>

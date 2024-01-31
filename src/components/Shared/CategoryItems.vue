@@ -52,9 +52,7 @@ const props = defineProps({
   background-color: var(--second-black);
   color: #fff;
 }
-.category-content .category-header h1{
-  line-height: 250px;
-}
+.category-content .category-header h1{line-height: 250px;}
 .category-content .products{
   display: flex;
   flex-direction: column-reverse;
@@ -63,9 +61,7 @@ const props = defineProps({
   display: flex;
   margin-top: 100px;
 }
-.category-content .products .product:nth-child(even){
-  flex-direction: row-reverse;
-}
+.category-content .products .product:nth-child(even){flex-direction: row-reverse;}
 .category-content .products .product .product-image img{
   background-size: cover;
   width: 540px;
@@ -88,5 +84,20 @@ const props = defineProps({
 }
 .category-content .products .product:nth-child(even) .product-info .desc{
   /* padding-left: 50px; */
+}
+
+/* ----------------------------------------------- */
+/* ---------------- Media Queries ---------------- */
+/* ----------------------------------------------- */
+
+
+/* ----------- Mobile ----------- */
+@media only screen and (min-width: 350px) and (max-width: 600px) { 
+
+}
+
+/* ----------- Tablet ----------- */
+@media only screen and (min-width: 601px) and (max-width: 1024px) {
+
 }
 </style>

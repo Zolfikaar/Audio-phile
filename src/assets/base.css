@@ -171,3 +171,23 @@ button:hover{
   text-transform: uppercase;
 }
 #app{position: relative; z-index: 2;}
+
+/* ----------------------------------------------- */
+/* ---------------- Media Queries ---------------- */
+/* ----------------------------------------------- */
+
+
+/* ----------- Mobile ----------- */
+@media only screen and (min-width: 350px) and (max-width: 600px) { 
+  
+  .wrapper{
+    width: 90%;
+  }
+}
+
+/* ----------- Tablet ----------- */
+@media only screen and (min-width: 601px) and (max-width: 1024px) {
+  .wrapper{
+    width: 90%;
+  }
+}

@@ -4,8 +4,7 @@
       <div class="wrapper">
         <div class="top-products-box">
           <div class="box zx9">
-            
-            <img src="@/assets/home/desktop/image-speaker-zx9.png" alt="">
+            <div class="left-box image-box"></div>
             <div class="right-box">
               <h1>ZX9 SPEAKER</h1>
               <p>Upgrade to premium speakers that are phenomenally built to deliver truly remarkable sound.</p>
@@ -17,10 +16,10 @@
               <h2>ZX7 SPEAKER</h2>
               <button class="btn2">See Product</button>
             </div>
-            <img src="@/assets/home/desktop/image-speaker-zx7.jpg" alt="">
+            <div class="right-box image-box"></div>
           </div>
           <div class="box yx1">
-            <img src="@/assets/home/desktop/image-earphones-yx1.jpg" alt="">
+            <div class="left-box image-box"></div>
             <div class="right-box">
                 <h2>YX1 EARPHONES</h2>
                 <button class="btn2">See Product</button>
@@ -33,7 +32,6 @@
 </template>
 
 <style scoped>
-
 .top-products .top-products-box .box{
   margin: 20px 0;
   width: 100%;
@@ -47,7 +45,9 @@
   background-image: url(@/assets/home/desktop/pattern-circles.svg);
   overflow: hidden;
 }
-.top-products .top-products-box .box.zx9 img{
+.top-products .top-products-box .box.zx9 .left-box.image-box{
+  background-image: url('/src/assets/home/desktop/image-speaker-zx9.png');
+  background-size: cover;
   width: 410px;
   height: 493px;
   position: relative;
@@ -86,7 +86,9 @@
   text-decoration: none;
 }
 .top-products .top-products-box .box.zx7{position: relative;}
-.top-products .top-products-box .box.zx7 img{
+.top-products .top-products-box .box.zx7 .right-box.image-box{
+  background-image: url('/src/assets/home/desktop/image-speaker-zx7.jpg');
+  background-size: cover;
   border-radius: 8px;
   width: 100%;
   overflow: hidden;
@@ -118,10 +120,86 @@
   justify-content: center;
   align-items: center;
 }
-.top-products .top-products-box .box.yx1 img{
+.top-products .top-products-box .box.yx1 .left-box.image-box{
   border-radius: 8px;
+  background-image: url('/src/assets/home/desktop/image-earphones-yx1.jpg');
+  background-size: cover;
 }
-.top-products .top-products-box .box.yx1 .right-box button{
-  margin-left: -80px;
+.top-products .top-products-box .box.yx1 .right-box button{margin-left: -80px;}
+
+/* ----------------------------------------------- */
+/* ---------------- Media Queries ---------------- */
+/* ----------------------------------------------- */
+
+
+/* ----------- Mobile ----------- */
+@media only screen and (min-width: 350px) and (max-width: 600px) { 
+  .top-products .top-products-box .box.zx9{
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 600px;
+  }
+  .top-products .top-products-box .box.zx9 .right-box{
+    text-align: center;
+    width: 100%;
+    align-items: center;
+  }
+  .top-products .top-products-box .box.zx9 .left-box.image-box{
+    background-image: url('/src/assets/home/mobile/image-speaker-zx9.png');
+    width: 172px;
+    height: 207px;
+    bottom: unset;
+    left: unset;
+    margin-bottom: 50px;
+  }
+
+  .top-products .top-products-box .box.zx7 .right-box.image-box{
+    /* background-image: url('/src/assets/home/mobile/image-speaker-zx7.jpg'); */
+    /* height: 320px; */
+  }
+}
+
+/* ----------- Tablet ----------- */
+@media only screen and (min-width: 601px) and (max-width: 1024px) {
+  .top-products .top-products-box .box.zx9{
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 670px;
+    background-size: unset;
+    background-position-x: center;
+    background-position-y: bottom;
+  }
+  .top-products .top-products-box .box.zx9 .right-box{
+    text-align: center;
+    width: 100%;
+    align-items: center;
+  }
+  .top-products .top-products-box .box.zx9 .left-box.image-box{
+    background-image: url('/src/assets/home/tablet/image-speaker-zx9.png');
+    width: 172px;
+    height: 207px;
+    bottom: unset;
+    left: unset;
+    margin-bottom: 50px;
+  }
+  .top-products .top-products-box .box.zx7 .right-box.image-box{
+    background-image: url('/src/assets/home/tablet/image-speaker-zx7.jpg');
+    height: 320px;
+  }
+  .top-products .top-products-box .box.zx7 .left-box{
+    left: 23%;
+  }
+  .top-products .top-products-box .box.zx7,
+  .top-products .top-products-box .box.yx1{
+    height: 320px;
+  }
+  .top-products .top-products-box .box.yx1 .left-box.image-box{
+    width: 50%; 
+    background-image: url('/src/assets/home/tablet/image-earphones-yx1.jpg');
+    height: 320px;
+  }
+  .top-products .top-products-box .box.yx1 .right-box{margin-left: 10px; width: 50%;}
 }
 </style>

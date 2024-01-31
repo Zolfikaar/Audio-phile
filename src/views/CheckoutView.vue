@@ -751,4 +751,19 @@ const completeOrderGoHome = () => {
   margin-bottom: 20px;
 }
 .checkout-modal button{width: 100%;}
+
+/* ----------------------------------------------- */
+/* ---------------- Media Queries ---------------- */
+/* ----------------------------------------------- */
+
+
+/* ----------- Mobile ----------- */
+@media only screen and (min-width: 350px) and (max-width: 600px) { 
+
+}
+
+/* ----------- Tablet ----------- */
+@media only screen and (min-width: 601px) and (max-width: 1024px) {
+
+}
 </style>
