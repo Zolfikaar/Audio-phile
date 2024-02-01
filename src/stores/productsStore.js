@@ -32,8 +32,9 @@ export const useProductsStore = defineStore("products", {
       } else {
         // Check if 'data.json' file is available
         try {
-          // let response = await axios.get('https://zolfikaar.github.io/live-project-name/data.json');
-          let response = await axios.get("/data.json");
+          let response = await axios.get(
+            "https://zolfikaar.github.io/Audio-phile/data.json"
+          );
 
           this.products = response.data.products;
           localStorage.setItem("products", JSON.stringify(this.products));
