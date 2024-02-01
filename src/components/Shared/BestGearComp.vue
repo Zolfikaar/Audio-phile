@@ -46,6 +46,7 @@
   background-size: cover;
   border-radius: 8px;
   width: 40%;
+  height: 588px;
 }
 
 /* ----------------------------------------------- */

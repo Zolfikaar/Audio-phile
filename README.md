@@ -32,12 +32,20 @@ Users should be able to:
 
 ### Screenshot
 
-![](./screenshot.jpg)
+![](./screenshots/home.png)
+![](./screenshots/speakers.png)
+![](./screenshots/single%20product.png)
+![](./screenshots/checkout%20form.png)
+![](./screenshots/checkout%20form%20with%20errors.png)
+![](./screenshots/payment%20modal.png)
+![](./screenshots/payment%20modal%20with%20details.png)
+![](./screenshots/empty%20cart.png)
+![](./screenshots/cart.png)
 
 ### Links
 
 - Solution URL: [Solution URL](https://your-solution-url.com)
-- Live Site URL: [Live site URL](https://your-live-site-url.com)
+- Live Site URL: [Live site URL](https://zolfikaar.github.io/Audio-phile/)
 
 ## My process
 

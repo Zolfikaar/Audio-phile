@@ -59,6 +59,7 @@ footer{
   background-color: var(--main-black);
   color: white;
   position: relative;
+  overflow: hidden;
 }
 
 footer .line-box{

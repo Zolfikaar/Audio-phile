@@ -42,7 +42,7 @@
   justify-content: space-between;
   height: 560px;
   background-color: var(--main-orang);
-  background-image: url(@/assets/home/desktop/pattern-circles.svg);
+  background-image: url(/src/assets/home/desktop/pattern-circles.svg);
   overflow: hidden;
 }
 .top-products .top-products-box .box.zx9 .left-box.image-box{
@@ -91,6 +91,7 @@
   background-size: cover;
   border-radius: 8px;
   width: 100%;
+  height: 320px;
   overflow: hidden;
 }
 .top-products .top-products-box .box.zx7 .left-box{
@@ -112,7 +113,7 @@
 }
 .top-products .top-products-box .box.yx1 .right-box{
   background-color: var(--light-gray);
-  width: 100%;
+  width: 50%;
   margin-left: 20px;
   border-radius: 8px;
   display: flex;
@@ -123,6 +124,8 @@
 .top-products .top-products-box .box.yx1 .left-box.image-box{
   border-radius: 8px;
   background-image: url('/src/assets/home/desktop/image-earphones-yx1.jpg');
+  height: 320px;
+  width: 50%;
   background-size: cover;
 }
 .top-products .top-products-box .box.yx1 .right-box button{margin-left: -80px;}

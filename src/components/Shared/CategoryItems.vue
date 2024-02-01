@@ -55,7 +55,10 @@ const props = defineProps({
 .category-content .category-header h1{line-height: 250px;}
 .category-content .products{
   display: flex;
-  flex-direction: column-reverse;
+  flex-direction: column;
+}
+.speaker .category-content .products{
+  flex-direction: column-reverse !important;
 }
 .category-content .products .product{
   display: flex;
