@@ -48,25 +48,20 @@ onBeforeUnmount(() => {
   window.removeEventListener('resize', updateScreenWidth);
 });
 
-const getProductImage = (index) => {
-  
-  const product = props.categoryData[index];
+const getProductImage = (product) => {
 
-  // Check if product and categoryImage exist
-  if (product && product.categoryImage) {
-    
-    const images = product.categoryImage;
-  
-    if (screenWidth.value >= 1024 && images?.desktop) {
-      return '/src/' + images.desktop;
-    }
-    if (screenWidth.value >= 601 && screenWidth.value <= 1023 && images?.tablet) {
-      return '/src/' + images.tablet;
-    }
-    if (screenWidth.value >= 350 && screenWidth.value <= 600 && images?.mobile) {
-      return '/src/' + images.mobile;
-    } 
+  const images = product.categoryImage;
+
+  if (screenWidth.value >= 1024 && images?.desktop) {
+    return '/src/' + images.desktop;
   }
+  if (screenWidth.value >= 601 && screenWidth.value <= 1023 && images?.tablet) {
+    return '/src/' + images.tablet;
+  }
+  if (screenWidth.value >= 350 && screenWidth.value <= 600 && images?.mobile) {
+    return '/src/' + images.mobile;
+  } 
+  
 };
 </script>
 
