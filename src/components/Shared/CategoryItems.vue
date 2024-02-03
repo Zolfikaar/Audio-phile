@@ -32,14 +32,6 @@ const props = defineProps({
   }
 })
 
-
-const screenWidth = ref(window.innerWidth);
-
-// Choose the appropriate image based on the screen width
-const updateScreenWidth = () => {
-  screenWidth.value = window.innerWidth;
-};
-
 onMounted(() => {
   window.addEventListener('resize', updateScreenWidth);
 });
@@ -48,18 +40,28 @@ onBeforeUnmount(() => {
   window.removeEventListener('resize', updateScreenWidth);
 });
 
+const screenWidth = ref(window.innerWidth);
+
+// Choose the appropriate image based on the screen width
+const updateScreenWidth = () => {
+  screenWidth.value = window.innerWidth;
+};
+
 const getProductImage = (product) => {
 
   const images = product.categoryImage;
 
   if (screenWidth.value >= 1024 && images?.desktop) {
-    return '/src/' + images.desktop;
+    // return '/src/' + images.desktop;
+    return `${import.meta.env.BASE_URL}src/${images.desktop}`
   }
   if (screenWidth.value >= 601 && screenWidth.value <= 1023 && images?.tablet) {
-    return '/src/' + images.tablet;
+    // return '/src/' + images.tablet;
+    return `${import.meta.env.BASE_URL}src/${images.tablet}`
   }
   if (screenWidth.value >= 350 && screenWidth.value <= 600 && images?.mobile) {
-    return '/src/' + images.mobile;
+    // return '/src/' + images.mobile;
+    return `${import.meta.env.BASE_URL}src/${images.mobile}`
   } 
   
 };

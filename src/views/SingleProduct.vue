@@ -14,38 +14,43 @@ const product = ref({});
 const productQuantity = ref(1);
 const maxProductQuantity = ref(10);
 
-onMounted(async () => {
+onMounted( () => {
   let currentProduct = products.value.find((item) => item.slug === slug);
   product.value = currentProduct;
+
+  window.addEventListener('resize', updateScreenWidth);
+
 });
 
-const getProductImage = (images) => {
-  // Check the screen width
-  const screenWidth = ref(window.innerWidth);
 
-  // Choose the appropriate image based on the screen width
-  const updateScreenWidth = () => {
-    screenWidth.value = window.innerWidth;
-  };
+onBeforeUnmount(() => {
+  window.removeEventListener('resize', updateScreenWidth);
+});
 
-  onMounted(() => {
-    window.addEventListener('resize', updateScreenWidth);
-  });
+const screenWidth = ref(window.innerWidth);
 
-  onBeforeUnmount(() => {
-    window.removeEventListener('resize', updateScreenWidth);
-  });
+// Choose the appropriate image based on the screen width
+const updateScreenWidth = () => {
+  screenWidth.value = window.innerWidth;
+};
+
+const getProductImage = (product) => {
+
+  const images = product.categoryImage;
 
   if (screenWidth.value >= 1024 && images?.desktop) {
-    return '/src/' + images.desktop;
-  } else if (screenWidth.value >= 601 && screenWidth.value <= 1023 && images?.tablet) {
-    return '/src/' + images.tablet;
-  } else if (screenWidth.value >= 350 && screenWidth.value <= 600 && images?.mobile) {
-    return '/src/' + images.mobile;
-  } else {
-    // Provide a default image or placeholder if needed
-    return '/src/default-image.jpg';
+    // return '/src/' + images.desktop;
+    return `${import.meta.env.BASE_URL}src/${images.desktop}`
   }
+  if (screenWidth.value >= 601 && screenWidth.value <= 1023 && images?.tablet) {
+    // return '/src/' + images.tablet;
+    return `${import.meta.env.BASE_URL}src/${images.tablet}`
+  }
+  if (screenWidth.value >= 350 && screenWidth.value <= 600 && images?.mobile) {
+    // return '/src/' + images.mobile;
+    return `${import.meta.env.BASE_URL}src/${images.mobile}`
+  } 
+  
 };
 
 const incrementProductQuantity = () => {
@@ -74,7 +79,7 @@ const addToCart = cartStore.addToCart;
   <div class="product" >
 
     <div class="product-image">
-      <img :src="getProductImage(product.categoryImage) " alt="">
+      <img :src="getProductImage(product) " alt="">
     </div>
 
     <div class="product-info">
