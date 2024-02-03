@@ -10,7 +10,7 @@
             <h1 class="product-title">XX99 Mark II Headphones</h1>
             <p class="product-description">Experience natural, lifelike audio and exceptional build quality made for the
               passionate music enthusiast.</p>
-            <button class="btn1"><a href="#">See Product</a></button>
+              <router-link to="/product/xx99-mark-two-headphones"><button class="btn1">See Product</button></router-link>
           </div>
 
           <div class="product-image">
@@ -145,12 +145,10 @@
   .hero-section .product-box .product-image{
     z-index: 1;
     position: relative;
-    /* top: 50%; */
     left: 50%;
     transform: translate(-50%,-74%);
   }
   .hero-section .product-box .product-image img{zoom: 1.4;}
   .product-box .product-image img{height: 730px;}
-
 }
 </style>

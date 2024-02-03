@@ -8,13 +8,13 @@
             <div class="right-box">
               <h1>ZX9 SPEAKER</h1>
               <p>Upgrade to premium speakers that are phenomenally built to deliver truly remarkable sound.</p>
-              <button class="btn4">See Product</button>
+              <router-link to="/product/zx9-speaker"><button class="btn4">See Product</button></router-link>
             </div>
           </div>
           <div class="box zx7">
             <div class="left-box">
               <h2>ZX7 SPEAKER</h2>
-              <button class="btn2">See Product</button>
+              <router-link to="/product/zx7-speaker"><button class="btn2">See Product</button></router-link>
             </div>
             <div class="right-box image-box"></div>
           </div>
@@ -22,7 +22,7 @@
             <div class="left-box image-box"></div>
             <div class="right-box">
                 <h2>YX1 EARPHONES</h2>
-                <button class="btn2">See Product</button>
+                <router-link to="/product/yx1-earphones"><button class="btn2">See Product</button></router-link>
             </div>
           </div>
         </div>

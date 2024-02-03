@@ -22,13 +22,13 @@ const toggleMenu = () => useCartStore().toggleMenu()
           <div class="hamburger" @click="toggleMenu">
             <svg width="16" height="15" xmlns="http://www.w3.org/2000/svg"><g fill="#FFF" fill-rule="evenodd"><path d="M0 0h16v3H0zM0 6h16v3H0zM0 12h16v3H0z"/></g></svg>
           </div>
-          <RouterLink :to="{name: 'home'}"><img src="@/assets/shared/desktop/logo.svg" alt=""></RouterLink>
+          <RouterLink :to="{name: 'home'}"><img src="/src/assets/shared/desktop/logo.svg" alt=""></RouterLink>
         </div>
 
         <Navbar />
         
         <div class="nav-item cart-icon" @click="toggleCart">
-          <img src="@/assets/shared/desktop/icon-cart.svg" alt="Shopping Cart">
+          <img src="/src/assets/shared/desktop/icon-cart.svg" alt="Shopping Cart">
         </div>
 
       </nav>

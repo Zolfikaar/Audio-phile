@@ -1,25 +1,24 @@
 <script setup>
 import {onMounted, ref,onBeforeUnmount} from 'vue'
 
-import xx59Desktop from '/src/assets/product-xx59-headphones/desktop/image-category-page-preview.jpg'
-import xx59Tablet from '/src/assets/product-xx59-headphones/tablet/image-category-page-preview.jpg'
-import xx59Mobile from '/src/assets/product-xx59-headphones/mobile/image-category-page-preview.jpg'
-import xx99mk1Desktop from '/src/assets/product-xx99-mark-one-headphones/desktop/image-category-page-preview.jpg'
-import xx99mk1Tablet from '/src/assets/product-xx99-mark-one-headphones/tablet/image-category-page-preview.jpg'
-import xx99mk1Mobile from '/src/assets/product-xx99-mark-one-headphones/mobile/image-category-page-preview.jpg'
-import xx99mk2Desktop from '/src/assets/product-xx99-mark-two-headphones/desktop/image-category-page-preview.jpg'
-import xx99mk2Tablet from '/src/assets/product-xx99-mark-two-headphones/tablet/image-category-page-preview.jpg'
-import xx99mk2Mobile from '/src/assets/product-xx99-mark-two-headphones/mobile/image-category-page-preview.jpg'
-import yx1Desktop from '/src/assets/product-yx1-earphones/desktop/image-category-page-preview.jpg'
-import yx1Tablet from '/src/assets/product-yx1-earphones/tablet/image-category-page-preview.jpg'
-import yx1Mobile from '/src/assets/product-yx1-earphones/mobile/image-category-page-preview.jpg'
-import zx7Desktop from '/src/assets/product-zx7-speaker/desktop/image-category-page-preview.jpg'
-import zx7Tablet from '/src/assets/product-zx7-speaker/tablet/image-category-page-preview.jpg'
-import zx7Mobile from '/src/assets/product-zx7-speaker/mobile/image-category-page-preview.jpg'
-import zx9Desktop from '/src/assets/product-zx9-speaker/desktop/image-category-page-preview.jpg'
-import zx9Tablet from '/src/assets/product-zx9-speaker/tablet/image-category-page-preview.jpg'
-import zx9Mobile from '/src/assets/product-zx9-speaker/mobile/image-category-page-preview.jpg'
-
+import xx59Desktop from '@/assets/product-xx59-headphones/desktop/image-category-page-preview.jpg'
+import xx59Tablet from '@/assets/product-xx59-headphones/tablet/image-category-page-preview.jpg'
+import xx59Mobile from '@/assets/product-xx59-headphones/mobile/image-category-page-preview.jpg'
+import xx99mk1Desktop from '@/assets/product-xx99-mark-one-headphones/desktop/image-category-page-preview.jpg'
+import xx99mk1Tablet from '@/assets/product-xx99-mark-one-headphones/tablet/image-category-page-preview.jpg'
+import xx99mk1Mobile from '@/assets/product-xx99-mark-one-headphones/mobile/image-category-page-preview.jpg'
+import xx99mk2Desktop from '@/assets/product-xx99-mark-two-headphones/desktop/image-category-page-preview.jpg'
+import xx99mk2Tablet from '@/assets/product-xx99-mark-two-headphones/tablet/image-category-page-preview.jpg'
+import xx99mk2Mobile from '@/assets/product-xx99-mark-two-headphones/mobile/image-category-page-preview.jpg'
+import yx1Desktop from '@/assets/product-yx1-earphones/desktop/image-category-page-preview.jpg'
+import yx1Tablet from '@/assets/product-yx1-earphones/tablet/image-category-page-preview.jpg'
+import yx1Mobile from '@/assets/product-yx1-earphones/mobile/image-category-page-preview.jpg'
+import zx7Desktop from '@/assets/product-zx7-speaker/desktop/image-category-page-preview.jpg'
+import zx7Tablet from '@/assets/product-zx7-speaker/tablet/image-category-page-preview.jpg'
+import zx7Mobile from '@/assets/product-zx7-speaker/mobile/image-category-page-preview.jpg'
+import zx9Desktop from '@/assets/product-zx9-speaker/desktop/image-category-page-preview.jpg'
+import zx9Tablet from '@/assets/product-zx9-speaker/tablet/image-category-page-preview.jpg'
+import zx9Mobile from '@/assets/product-zx9-speaker/mobile/image-category-page-preview.jpg'
 
 const props = defineProps({
   categoryData: {
@@ -52,17 +51,14 @@ const getProductImage = (product) => {
   const images = product.categoryImage;
 
   if (screenWidth.value >= 1024 && images?.desktop) {
-    // return '/src/' + images.desktop;
-    return `${import.meta.env.BASE_URL}src/${images.desktop}`
+    return '/src/' + images.desktop;
   }
   if (screenWidth.value >= 601 && screenWidth.value <= 1023 && images?.tablet) {
-    // return '/src/' + images.tablet;
-    return `${import.meta.env.BASE_URL}src/${images.tablet}`
+    return '/src/' + images.tablet;
   }
   if (screenWidth.value >= 350 && screenWidth.value <= 600 && images?.mobile) {
-    // return '/src/' + images.mobile;
-    return `${import.meta.env.BASE_URL}src/${images.mobile}`
-  } 
+    return '/src/' + images.mobile;
+  }
   
 };
 </script>

@@ -17,7 +17,7 @@ import Navbar from '@/components/Navbar.vue'
         <div class="top-box">
 
           <div class="logo">
-            <router-link :to="{name: 'home'}"><img src="@/assets/shared/desktop/logo.svg" alt=""></router-link>
+            <router-link :to="{name: 'home'}"><img src="/src/assets/shared/desktop/logo.svg" alt=""></router-link>
           </div>
 
           <Navbar />
