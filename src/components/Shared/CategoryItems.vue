@@ -1,4 +1,26 @@
 <script setup>
+import {onMounted, ref,onBeforeUnmount} from 'vue'
+
+import xx59Desktop from '/src/assets/product-xx59-headphones/desktop/image-category-page-preview.jpg'
+import xx59Tablet from '/src/assets/product-xx59-headphones/tablet/image-category-page-preview.jpg'
+import xx59Mobile from '/src/assets/product-xx59-headphones/mobile/image-category-page-preview.jpg'
+import xx99mk1Desktop from '/src/assets/product-xx99-mark-one-headphones/desktop/image-category-page-preview.jpg'
+import xx99mk1Tablet from '/src/assets/product-xx99-mark-one-headphones/tablet/image-category-page-preview.jpg'
+import xx99mk1Mobile from '/src/assets/product-xx99-mark-one-headphones/mobile/image-category-page-preview.jpg'
+import xx99mk2Desktop from '/src/assets/product-xx99-mark-two-headphones/desktop/image-category-page-preview.jpg'
+import xx99mk2Tablet from '/src/assets/product-xx99-mark-two-headphones/tablet/image-category-page-preview.jpg'
+import xx99mk2Mobile from '/src/assets/product-xx99-mark-two-headphones/mobile/image-category-page-preview.jpg'
+import yx1Desktop from '/src/assets/product-yx1-earphones/desktop/image-category-page-preview.jpg'
+import yx1Tablet from '/src/assets/product-yx1-earphones/tablet/image-category-page-preview.jpg'
+import yx1Mobile from '/src/assets/product-yx1-earphones/mobile/image-category-page-preview.jpg'
+import zx7Desktop from '/src/assets/product-zx7-speaker/desktop/image-category-page-preview.jpg'
+import zx7Tablet from '/src/assets/product-zx7-speaker/tablet/image-category-page-preview.jpg'
+import zx7Mobile from '/src/assets/product-zx7-speaker/mobile/image-category-page-preview.jpg'
+import zx9Desktop from '/src/assets/product-zx9-speaker/desktop/image-category-page-preview.jpg'
+import zx9Tablet from '/src/assets/product-zx9-speaker/tablet/image-category-page-preview.jpg'
+import zx9Mobile from '/src/assets/product-zx9-speaker/mobile/image-category-page-preview.jpg'
+
+
 const props = defineProps({
   categoryData: {
     type: Object,
@@ -9,6 +31,37 @@ const props = defineProps({
     required: true
   }
 })
+
+
+const screenWidth = ref(window.innerWidth);
+
+// Choose the appropriate image based on the screen width
+const updateScreenWidth = () => {
+  screenWidth.value = window.innerWidth;
+};
+
+onMounted(() => {
+  window.addEventListener('resize', updateScreenWidth);
+});
+
+onBeforeUnmount(() => {
+  window.removeEventListener('resize', updateScreenWidth);
+});
+
+const getProductImage = (index) => {
+  
+  let images = props.categoryData[index].categoryImage
+
+  if (screenWidth.value >= 1024 && images?.desktop) {
+    return '/src/' + images.desktop;
+  }
+  if (screenWidth.value >= 601 && screenWidth.value <= 1023 && images?.tablet) {
+    return '/src/' + images.tablet;
+  }
+  if (screenWidth.value >= 350 && screenWidth.value <= 600 && images?.mobile) {
+    return '/src/' + images.mobile;
+  } 
+};
 </script>
 
 <template>
@@ -25,7 +78,7 @@ const props = defineProps({
         <div class="product" v-for="product in props.categoryData" :key="product">
 
           <div class="product-image">
-            <img :src="'src/' + product.image.desktop" alt="">
+            <img :src="getProductImage(product)" alt="">
           </div>
 
           <div class="product-info">
