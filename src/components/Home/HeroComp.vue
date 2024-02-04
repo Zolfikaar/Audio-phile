@@ -2,7 +2,6 @@
   <div class="hero-section">
       <div class="wrapper">
         
-        <!-- New Product -->
         <div class="product-box">
 
           <div class="product-info">
@@ -30,7 +29,6 @@
   padding: 20px 0;
   color: white;
   height: 100vh;
-  overflow:hidden;
 }
 .product-box{
   display: flex;

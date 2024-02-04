@@ -13,7 +13,6 @@ import earphonesThumb from '/public/assets/shared/desktop/image-category-thumbna
 
         <router-link :to="{name: 'headphones'}">
           <div class="category-box">
-              <!-- <img src="/src/assets/shared/desktop/image-category-thumbnail-headphones.png" alt="headphones category"> -->
               <img :src="headphoneThumb" alt="headphones category">
               <h4 class="category-title">Headphones</h4>
               <button class="btn3">Shop <span class="arrow">></span></button>
@@ -22,7 +21,6 @@ import earphonesThumb from '/public/assets/shared/desktop/image-category-thumbna
 
         <RouterLink :to="{name: 'speakers'}">
           <div class="category-box">
-            <!-- <img src="/src/assets/shared/desktop/image-category-thumbnail-speakers.png" alt="speakers category"> -->
             <img :src="speakersThumb" alt="speakers category">
             <h4 class="category-title">Speakers</h4>
             <button class="btn3">Shop <span class="arrow">></span></button>
@@ -31,7 +29,6 @@ import earphonesThumb from '/public/assets/shared/desktop/image-category-thumbna
 
         <RouterLink :to="{name: 'earphones'}">
           <div class="category-box">
-            <!-- <img src="/src/assets/shared/desktop/image-category-thumbnail-earphones.png" alt="earphones category"> -->
             <img :src="earphonesThumb" alt="earphones category">
             <h4 class="category-title">Earphones</h4>
             <button class="btn3">Shop <span class="arrow">></span></button>
