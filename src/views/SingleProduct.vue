@@ -38,15 +38,18 @@ const getProductImage = (product) => {
   const images = product.categoryImage;
 
   if (screenWidth.value >= 1024 && images?.desktop) {
-    return '/src/' + images.desktop;
+    // return '/src/' + images.desktop;
+    return `${import.meta.env.BASE_URL}src/${images.desktop}`
   }
 
   if (screenWidth.value >= 601 && screenWidth.value <= 1023 && images?.tablet) {
-    return '/src/' + images.tablet;
+    // return '/src/' + images.tablet;
+    return `${import.meta.env.BASE_URL}src/${images.tablet}`
   }
   
   if (screenWidth.value >= 350 && screenWidth.value <= 600 && images?.mobile) {
-    return '/src/' + images.mobile;
+    // return '/src/' + images.mobile;
+    return `${import.meta.env.BASE_URL}src/${images.mobile}`
   } 
   
 };
@@ -119,15 +122,15 @@ const addToCart = cartStore.addToCart;
   <div class="gallery">
     <div class="small">
       <div class="first">
-        <img :src="product.gallery?.first.desktop" alt="">
+        <img :src="'/src/' + product.gallery?.first.desktop" alt="">
       </div>
       <div class="second">
-        <img :src="product.gallery?.second.desktop" alt="">
+        <img :src="'/src/' + product.gallery?.second.desktop" alt="">
       </div>
     </div>
     <div class="big">
       <div class="third">
-        <img :src="product.gallery?.third.desktop" alt="">
+        <img :src="'/src/' + product.gallery?.third.desktop" alt="">
       </div>
     </div>
   </div>
@@ -137,7 +140,7 @@ const addToCart = cartStore.addToCart;
     <div class="items">
       <div class="item" v-for="item in product.others" :key="item">
         <div class="item-image">
-          <img :src="item.image?.desktop" alt="">
+          <img :src="'/src/' + item.image?.desktop" alt="">
         </div>
         <h5>{{ item.name }}</h5>
         <button class="btn1" @click="$router.go()"><router-link :to="'/product/' + item.slug">See Product</router-link></button>

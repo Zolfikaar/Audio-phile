@@ -30,6 +30,7 @@
   padding: 20px 0;
   color: white;
   height: 100vh;
+  overflow:hidden;
 }
 .product-box{
   display: flex;

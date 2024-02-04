@@ -51,13 +51,16 @@ const getProductImage = (product) => {
   const images = product.categoryImage;
 
   if (screenWidth.value >= 1024 && images?.desktop) {
-    return '/src/' + images.desktop;
+    // return '/src/' + images.desktop;
+    return `${import.meta.env.BASE_URL}src/${images.desktop}`
   }
   if (screenWidth.value >= 601 && screenWidth.value <= 1023 && images?.tablet) {
-    return '/src/' + images.tablet;
+    // return '/src/' + images.tablet;
+    return `${import.meta.env.BASE_URL}src/${images.tablet}`
   }
   if (screenWidth.value >= 350 && screenWidth.value <= 600 && images?.mobile) {
-    return '/src/' + images.mobile;
+    // return '/src/' + images.mobile;
+    return `${import.meta.env.BASE_URL}src/${images.mobile}`
   }
   
 };
