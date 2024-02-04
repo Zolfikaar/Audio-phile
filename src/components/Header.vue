@@ -1,7 +1,9 @@
 <script setup>
+import logo from '/public/assets/shared/desktop/logo.svg'
+import cartIcon from '/public/assets/shared/desktop/icon-cart.svg'
 import { useRoute } from 'vue-router'
-import Navbar from '@/components/Navbar.vue'
 import { useCartStore } from '@/stores/cartStore'
+import Navbar from '@/components/Navbar.vue'
 import Menu from '@/components/Menu.vue'
 
 const route = useRoute();
@@ -22,13 +24,13 @@ const toggleMenu = () => useCartStore().toggleMenu()
           <div class="hamburger" @click="toggleMenu">
             <svg width="16" height="15" xmlns="http://www.w3.org/2000/svg"><g fill="#FFF" fill-rule="evenodd"><path d="M0 0h16v3H0zM0 6h16v3H0zM0 12h16v3H0z"/></g></svg>
           </div>
-          <RouterLink :to="{name: 'home'}"><img src="/src/assets/shared/desktop/logo.svg" alt=""></RouterLink>
+          <RouterLink :to="{name: 'home'}"><img :src="logo" alt=""></RouterLink>
         </div>
 
         <Navbar />
         
         <div class="nav-item cart-icon" @click="toggleCart">
-          <img src="/src/assets/shared/desktop/icon-cart.svg" alt="Shopping Cart">
+          <img :src="cartIcon" alt="Shopping Cart">
         </div>
 
       </nav>
