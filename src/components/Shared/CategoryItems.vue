@@ -52,15 +52,15 @@ const getProductImage = (product) => {
 
   if (screenWidth.value >= 1024 && images?.desktop) {
     // return '/src/' + images.desktop;
-    return `${import.meta.env.BASE_URL}src/${images.desktop}`
+    return `${import.meta.env.BASE_URL}src/assets/${images.desktop}`
   }
   if (screenWidth.value >= 601 && screenWidth.value <= 1023 && images?.tablet) {
     // return '/src/' + images.tablet;
-    return `${import.meta.env.BASE_URL}src/${images.tablet}`
+    return `${import.meta.env.BASE_URL}src/assets/${images.tablet}`
   }
   if (screenWidth.value >= 350 && screenWidth.value <= 600 && images?.mobile) {
     // return '/src/' + images.mobile;
-    return `${import.meta.env.BASE_URL}src/${images.mobile}`
+    return `${import.meta.env.BASE_URL}src/assets/${images.mobile}`
   }
   
 };
