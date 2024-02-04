@@ -1,6 +1,6 @@
 <script setup>
-import logo from '/public/assets/shared/desktop/logo.svg'
-import cartIcon from '/public/assets/shared/desktop/icon-cart.svg'
+import logo from '@/assets/shared/desktop/logo.svg'
+import cartIcon from '@/assets/shared/desktop/icon-cart.svg'
 import { useRoute } from 'vue-router'
 import { useCartStore } from '@/stores/cartStore'
 import Navbar from '@/components/Navbar.vue'

@@ -1,8 +1,8 @@
 <script setup>
 import { useCartStore } from '@/stores/cartStore'
-import headphoneThumb from '/public/assets/shared/desktop/image-category-thumbnail-headphones.png'
-import speakersThumb from '/public/assets/shared/desktop/image-category-thumbnail-speakers.png'
-import earphonesThumb from '/public/assets/shared/desktop/image-category-thumbnail-earphones.png'
+import headphoneThumb from '@/assets/shared/desktop/image-category-thumbnail-headphones.png'
+import speakersThumb from '@/assets/shared/desktop/image-category-thumbnail-speakers.png'
+import earphonesThumb from '@/assets/shared/desktop/image-category-thumbnail-earphones.png'
 </script>
 
 <template>

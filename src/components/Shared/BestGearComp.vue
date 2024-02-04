@@ -42,7 +42,7 @@
   letter-spacing: 1.43px;
   line-height: 40px;}
 .best-gear-section .right-box.image-box{
-  background-image: url('/assets/shared/desktop/image-best-gear.jpg');
+  background-image: url('/src/assets/shared/desktop/image-best-gear.jpg');
   background-size: cover;
   border-radius: 8px;
   width: 40%;
@@ -64,7 +64,7 @@
   .best-gear-section .left-box,
   .best-gear-section .right-box.image-box{width: 100%;}
   .best-gear-section .right-box.image-box{
-    background-image: url('/assets/shared/mobile/image-best-gear.jpg');
+    background-image: url('/src/assets/shared/mobile/image-best-gear.jpg');
     height: 300px;
 
   }
@@ -79,7 +79,7 @@
   .best-gear-section .left-box,
   .best-gear-section .right-box.image-box{width: 100%;}
   .best-gear-section .right-box.image-box{
-    background-image: url('/assets/shared/tablet/image-best-gear.jpg');
+    background-image: url('/src/assets/shared/tablet/image-best-gear.jpg');
     height: 300px;
   }
 }
