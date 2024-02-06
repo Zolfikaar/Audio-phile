@@ -1,23 +1,5 @@
 <script setup>
-import { onMounted, onBeforeUnmount, defineProps, ref, computed } from 'vue';
-// import xx59Desktop from '@/assets/product-xx59-headphones/desktop/image-category-page-preview.jpg'
-// import xx59Tablet from '@/assets/product-xx59-headphones/tablet/image-category-page-preview.jpg'
-// import xx59Mobile from '@/assets/product-xx59-headphones/mobile/image-category-page-preview.jpg'
-// import xx99mk1Desktop from '@/assets/product-xx99-mark-one-headphones/desktop/image-category-page-preview.jpg'
-// import xx99mk1Tablet from '@/assets/product-xx99-mark-one-headphones/tablet/image-category-page-preview.jpg'
-// import xx99mk1Mobile from '@/assets/product-xx99-mark-one-headphones/mobile/image-category-page-preview.jpg'
-// import xx99mk2Desktop from '@/assets/product-xx99-mark-two-headphones/desktop/image-category-page-preview.jpg'
-// import xx99mk2Tablet from '@/assets/product-xx99-mark-two-headphones/tablet/image-category-page-preview.jpg'
-// import xx99mk2Mobile from '@/assets/product-xx99-mark-two-headphones/mobile/image-category-page-preview.jpg'
-// import yx1Desktop from '@/assets/product-yx1-earphones/desktop/image-category-page-preview.jpg'
-// import yx1Tablet from '@/assets/product-yx1-earphones/tablet/image-category-page-preview.jpg'
-// import yx1Mobile from '@/assets/product-yx1-earphones/mobile/image-category-page-preview.jpg'
-// import zx7Desktop from '@/assets/product-zx7-speaker/desktop/image-category-page-preview.jpg'
-// import zx7Tablet from '@/assets/product-zx7-speaker/tablet/image-category-page-preview.jpg'
-// import zx7Mobile from '@/assets/product-zx7-speaker/mobile/image-category-page-preview.jpg'
-// import zx9Desktop from '@/assets/product-zx9-speaker/desktop/image-category-page-preview.jpg'
-// import zx9Tablet from '@/assets/product-zx9-speaker/tablet/image-category-page-preview.jpg'
-// import zx9Mobile from '@/assets/product-zx9-speaker/mobile/image-category-page-preview.jpg'
+import { onMounted, onBeforeUnmount, defineProps, ref } from 'vue';
 
 const props = defineProps({
   categoryData: {
@@ -45,78 +27,6 @@ const updateScreenWidth = () => {
   screenWidth.value = window.innerWidth;
 };
 
-// const getProductImage = (category) => {
-//   if (screenWidth.value >= 1024) {
-
-//     switch (category) {
-//       case 'headphones':
-//         return [
-//           xx59Desktop,
-//           xx99mk1Desktop,
-//           xx99mk2Desktop
-//         ]
-//       case 'speakers':
-//         return [
-//           zx9Desktop,
-//           zx7Desktop,
-//         ]
-//         case 'earphones':
-//           return [
-//             yx1Desktop,
-//           ]
-//       default:
-//         return '';
-//     }
-
-//   }
-//   if (screenWidth.value >= 601 && screenWidth.value <= 1023) {
-//     switch (category) {
-//       case 'headphones':
-//         return [
-//           xx59Tablet,
-//           xx99mk1Tablet,
-//           xx99mk2Tablet
-//         ]
-//       case 'speakers':
-//         return [
-//           yx1Tablet,
-//           zx7Tablet,
-//         ]
-//       case 'earphones':
-//         return [
-//           zx9Tablet
-//         ]
-//       default:
-//         return '';
-//     }
-//   }
-//   if (screenWidth.value >= 350 && screenWidth.value <= 600) {
-//     switch (category) {
-//       case 'headphones':
-//         return [
-//           xx59Mobile,
-//           xx99mk1Mobile,
-//           xx99mk2Mobile
-//         ]
-//       case 'speakers':
-//         return [
-//           yx1Mobile,
-//           zx7Mobile,
-//         ]
-//       case 'earphones':
-//         return [
-//           zx9Mobile
-//         ]
-//       default:
-//         return '';
-//     }
-//   }
-//   return [];
-// };
-
-// const filteredImages = computed(() => {
-//   return props.categoryData.map((product) => getProductImage(product.category));
-// });
 
 const getProductImage = (product) => {
   if (screenWidth.value >= 1024) {
@@ -145,7 +55,6 @@ const getProductImage = (product) => {
         <div class="product" v-for="product in props.categoryData" :key="product">
 
           <div class="product-image">
-            <!-- <img :src="filteredImages[index][index]"> -->
             <img :src="getProductImage(product)">
           </div>
 

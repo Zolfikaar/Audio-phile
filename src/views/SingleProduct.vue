@@ -20,8 +20,6 @@ onMounted( () => {
 
   window.addEventListener('resize', updateScreenWidth);
 
-  // product.value.categoryImage.desktop
-
 });
 
 onBeforeUnmount(() => {
@@ -40,17 +38,14 @@ const getProductImage = (product) => {
   const images = product.categoryImage;
 
   if (screenWidth.value >= 1024 && images?.desktop) {
-    // return new URL(images.desktop, import.meta.url).href
     return images.desktop
   }
 
   if (screenWidth.value >= 601 && screenWidth.value <= 1023 && images?.tablet) {
-    // return new URL(images.tablet, import.meta.url).href
     return images.tablet
   }
   
   if (screenWidth.value >= 350 && screenWidth.value <= 600 && images?.mobile) {
-    // return new URL(images.mobile, import.meta.url).href 
     return images.mobile
   } 
   
@@ -82,7 +77,7 @@ const addToCart = cartStore.addToCart;
   <div class="product" >
 
     <div class="product-image">
-      <img :src="getProductImage(product)" alt="">
+      <img :src="'.' + getProductImage(product)" alt="">
     </div>
 
     <div class="product-info">
@@ -90,7 +85,7 @@ const addToCart = cartStore.addToCart;
       <h1>{{ product.name }}</h1>
       <p class="desc">{{ product.description }}</p>
 
-      <h6 class="price">${{ product.price }}</h6>
+      <h6 class="price">${{ product.price.toLocaleString() }}</h6>
 
       <div class="btns">
         <div class="qty-box">
@@ -124,15 +119,15 @@ const addToCart = cartStore.addToCart;
   <div class="gallery">
     <div class="small">
       <div class="first">
-        <img :src="product.gallery?.first.desktop" alt="">
+        <img :src="'.' + product.gallery?.first.desktop" alt="">
       </div>
       <div class="second">
-        <img :src="'/public/' + product.gallery?.second.desktop" alt="">
+        <img :src="'.' + product.gallery?.second.desktop" alt="">
       </div>
     </div>
     <div class="big">
       <div class="third">
-        <img :src="product.gallery?.third.desktop" alt="">
+        <img :src="'.' + product.gallery?.third.desktop" alt="">
       </div>
     </div>
   </div>
@@ -142,7 +137,7 @@ const addToCart = cartStore.addToCart;
     <div class="items">
       <div class="item" v-for="item in product.others" :key="item">
         <div class="item-image">
-          <img :src="'/src/' + item.image?.desktop" alt="">
+          <img :src="'.' + item.image?.desktop" alt="">
         </div>
         <h5>{{ item.name }}</h5>
         <button class="btn1" @click="$router.go()"><router-link :to="'/product/' + item.slug">See Product</router-link></button>

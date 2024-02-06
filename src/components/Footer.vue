@@ -1,6 +1,6 @@
 <script setup>
 import Navbar from '@/components/Navbar.vue'
-import logo from '@/assets/shared/desktop/logo.svg'
+import logo from '/assets/shared/desktop/logo.svg'
 
 </script>
 <template>

@@ -13,7 +13,7 @@
           </div>
 
           <div class="product-image">
-            <img src="/src/assets/home/desktop/image-hero.jpg" alt="">
+            <img src="/assets/home/desktop/image-hero.jpg" alt="">
           </div>
 
         </div>
