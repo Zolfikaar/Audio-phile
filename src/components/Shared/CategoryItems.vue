@@ -45,78 +45,90 @@ const updateScreenWidth = () => {
   screenWidth.value = window.innerWidth;
 };
 
-const getProductImage = (category) => {
+// const getProductImage = (category) => {
+//   if (screenWidth.value >= 1024) {
+
+//     switch (category) {
+//       case 'headphones':
+//         return [
+//           xx59Desktop,
+//           xx99mk1Desktop,
+//           xx99mk2Desktop
+//         ]
+//       case 'speakers':
+//         return [
+//           zx9Desktop,
+//           zx7Desktop,
+//         ]
+//         case 'earphones':
+//           return [
+//             yx1Desktop,
+//           ]
+//       default:
+//         return '';
+//     }
+
+//   }
+//   if (screenWidth.value >= 601 && screenWidth.value <= 1023) {
+//     switch (category) {
+//       case 'headphones':
+//         return [
+//           xx59Tablet,
+//           xx99mk1Tablet,
+//           xx99mk2Tablet
+//         ]
+//       case 'speakers':
+//         return [
+//           yx1Tablet,
+//           zx7Tablet,
+//         ]
+//       case 'earphones':
+//         return [
+//           zx9Tablet
+//         ]
+//       default:
+//         return '';
+//     }
+//   }
+//   if (screenWidth.value >= 350 && screenWidth.value <= 600) {
+//     switch (category) {
+//       case 'headphones':
+//         return [
+//           xx59Mobile,
+//           xx99mk1Mobile,
+//           xx99mk2Mobile
+//         ]
+//       case 'speakers':
+//         return [
+//           yx1Mobile,
+//           zx7Mobile,
+//         ]
+//       case 'earphones':
+//         return [
+//           zx9Mobile
+//         ]
+//       default:
+//         return '';
+//     }
+//   }
+//   return [];
+// };
+
+// const filteredImages = computed(() => {
+//   return props.categoryData.map((product) => getProductImage(product.category));
+// });
+
+const getProductImage = (product) => {
   if (screenWidth.value >= 1024) {
-
-    switch (category) {
-      case 'headphones':
-        return [
-          xx59Desktop,
-          xx99mk1Desktop,
-          xx99mk2Desktop
-        ]
-      case 'speakers':
-        return [
-          zx9Desktop,
-          zx7Desktop,
-        ]
-        case 'earphones':
-          return [
-            yx1Desktop,
-          ]
-      default:
-        return '';
-    }
-
+    return product.categoryImage.desktop
   }
   if (screenWidth.value >= 601 && screenWidth.value <= 1023) {
-    switch (category) {
-      case 'headphones':
-        return [
-          xx59Tablet,
-          xx99mk1Tablet,
-          xx99mk2Tablet
-        ]
-      case 'speakers':
-        return [
-          yx1Tablet,
-          zx7Tablet,
-        ]
-      case 'earphones':
-        return [
-          zx9Tablet
-        ]
-      default:
-        return '';
-    }
+    return product.categoryImage.tablet
   }
   if (screenWidth.value >= 350 && screenWidth.value <= 600) {
-    switch (category) {
-      case 'headphones':
-        return [
-          xx59Mobile,
-          xx99mk1Mobile,
-          xx99mk2Mobile
-        ]
-      case 'speakers':
-        return [
-          yx1Mobile,
-          zx7Mobile,
-        ]
-      case 'earphones':
-        return [
-          zx9Mobile
-        ]
-      default:
-        return '';
-    }
+    return product.categoryImage.mobile
   }
-  return [];
 };
-
-const filteredImages = computed(() => {
-  return props.categoryData.map((product) => getProductImage(product.category));
-});
 </script>
 
 <template>
@@ -130,10 +142,11 @@ const filteredImages = computed(() => {
 
       <div class="products" >
 
-        <div class="product" v-for="(product, index) in props.categoryData" :key="index">
+        <div class="product" v-for="product in props.categoryData" :key="product">
 
           <div class="product-image">
-            <img :src="filteredImages[index][index]">
+            <!-- <img :src="filteredImages[index][index]"> -->
+            <img :src="getProductImage(product)">
           </div>
 
           <div class="product-info">
