@@ -63,7 +63,7 @@ const incrementProductQuantity = (item) => {
               </div>
               <div class="item-info">
                 <span class="item-name">{{ item.name }}</span>
-                <span class="item-price">${{ item.price.toLocaleString() }}</span>
+                <span class="item-price">${{ toLocaleString(item.price) }}</span>
               </div>
             </div>
             <div class="qty-box">
