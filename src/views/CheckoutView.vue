@@ -427,7 +427,7 @@ const completeOrderGoHome = () => {
               <div class="item-info">
                 <div class="item-other-info">
                   <div class="item-image">
-                    <img :src="'.' + item.image" alt="">
+                    <img :src="item.image" alt="">
                   </div>
                   <div class="item-name-and-price">
                     <div class="item-name">{{ item.name }}</div>

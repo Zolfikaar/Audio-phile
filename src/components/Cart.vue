@@ -59,11 +59,11 @@ const incrementProductQuantity = (item) => {
           <div class="cart-item" v-for="(item) in cart" :key="item">
             <div class="info-box">
               <div class="item-image">
-                <img :src="'.' + item.image" alt="">
+                <img :src="item.image" alt="">
               </div>
               <div class="item-info">
                 <span class="item-name">{{ item.name }}</span>
-                <span class="item-price">${{ item.price }}</span>
+                <span class="item-price">${{ item.price.toLocaleString() }}</span>
               </div>
             </div>
             <div class="qty-box">
